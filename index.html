@@ -1322,6 +1322,30 @@ const ConfirmLinksModal = ({ pcs, onClose }) => {
   );
 };
 
+const InventoryRowActions = ({ p, onConfirm, onEdit, onDelete }) => {
+  const [linkCopied, setLinkCopied] = useState(false);
+  const copyLink = () => {
+    const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
+    const url = base + 'confirm.html?pc=' + encodeURIComponent(p.pc);
+    navigator.clipboard.writeText(url).then(() => {
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    });
+  };
+  return (
+    <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end' }}>
+      <IconBtn onClick={() => onConfirm(p)} title="Confirmar atribuição (atualiza data para hoje)">
+        <CheckCircle2 size={13} />
+      </IconBtn>
+      <IconBtn onClick={copyLink} title={linkCopied ? 'Link copiado!' : 'Copiar link de confirmação'}>
+        {linkCopied ? <CheckCircle2 size={13} /> : <Link2 size={13} />}
+      </IconBtn>
+      <IconBtn onClick={() => onEdit(p)} title="Editar"><Edit3 size={13} /></IconBtn>
+      <IconBtn onClick={() => onDelete(p)} title="Eliminar" danger><Trash2 size={13} /></IconBtn>
+    </div>
+  );
+};
+
 // ===== Inventory table =====
 const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm, onShowLinks, navFilters, navSeq }) => {
   const t = useTheme();
@@ -1592,29 +1616,7 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm, onShowLinks, navFi
                       </div>
                     </td>
                     <td style={{ padding: '8px 10px' }}>
-                      {(() => {
-                        const [linkCopied, setLinkCopied] = useState(false);
-                        const copyLink = () => {
-                          const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
-                          const url = base + 'confirm.html?pc=' + encodeURIComponent(p.pc);
-                          navigator.clipboard.writeText(url).then(() => {
-                            setLinkCopied(true);
-                            setTimeout(() => setLinkCopied(false), 2000);
-                          });
-                        };
-                        return (
-                          <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end' }}>
-                            <IconBtn onClick={() => onConfirm(p)} title="Confirmar atribuição (atualiza data para hoje)">
-                              <CheckCircle2 size={13} />
-                            </IconBtn>
-                            <IconBtn onClick={copyLink} title={linkCopied ? 'Link copiado!' : 'Copiar link de confirmação'}>
-                              {linkCopied ? <CheckCircle2 size={13} color="currentColor" /> : <Link2 size={13} />}
-                            </IconBtn>
-                            <IconBtn onClick={() => onEdit(p)} title="Editar"><Edit3 size={13} /></IconBtn>
-                            <IconBtn onClick={() => onDelete(p)} title="Eliminar" danger><Trash2 size={13} /></IconBtn>
-                          </div>
-                        );
-                      })()}
+                      <InventoryRowActions p={p} onConfirm={onConfirm} onEdit={onEdit} onDelete={onDelete} />
                     </td>
                   </tr>
                 );
