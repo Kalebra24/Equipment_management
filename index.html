@@ -904,15 +904,19 @@ const Pill = ({ tier, small }) => {
   );
 };
 
-const Stat = ({ label, value, sub, accent, icon: Icon }) => {
+const Stat = ({ label, value, sub, accent, icon: Icon, onClick }) => {
   const t = useTheme();
   const acc = accent || t.accent;
   return (
-    <div style={{
+    <div onClick={onClick} style={{
       background: t.bgPanel, border: `1px solid ${t.border}`,
       borderRadius: 8, padding: 18, position: 'relative', overflow: 'hidden',
-      boxShadow: t.shadow,
-    }}>
+      boxShadow: t.shadow, cursor: onClick ? 'pointer' : 'default',
+      transition: 'border-color 0.15s',
+    }}
+    onMouseEnter={onClick ? e => { e.currentTarget.style.borderColor = acc; } : undefined}
+    onMouseLeave={onClick ? e => { e.currentTarget.style.borderColor = t.border; } : undefined}
+    >
       <div style={{
         position: 'absolute', top: 0, left: 0, height: 2, width: '100%',
         background: `linear-gradient(90deg, ${acc}, transparent)`,
@@ -999,7 +1003,12 @@ const useButtonStyles = () => {
 };
 
 // ===== Dashboard =====
-const Dashboard = ({ pcs }) => {
+const REVIEW_BREAKDOWN_LABELS = {
+  recent: 'Recente (<90d)', ageing: 'A envelhecer (90–180d)',
+  stale: 'Antiga (>180d)', never: 'Por confirmar',
+};
+
+const Dashboard = ({ pcs, onNavigate }) => {
   const t = useTheme();
   const thresholds = useThresholdsCtx();
   const { allLabels: funcaoLabels } = useFunctions();
@@ -1007,22 +1016,22 @@ const Dashboard = ({ pcs }) => {
     const total = pcs.length;
     const buckets = { excellent: 0, functional: 0, limited: 0, obsolete: 0 };
     let totalRam = 0, totalDisk = 0;
-    const so = {}, funcao = {}, estado = {}, disponibilidade = {};
+    const funcao = {}, estado = {}, disponibilidade = {}, ubicacao = {}, ramBands = {}, anos = {};
     pcs.forEach(p => {
       const tier = classifyTotal(p.totalScore || 0, thresholds, t);
       buckets[tier.key]++;
       totalRam += (p.memMB || 0);
       totalDisk += parseDiskTotal(p.disks);
-      const soKey = (p.so || '').includes('Windows 11') ? 'Win 11'
-        : (p.so || '').includes('Windows 10') ? 'Win 10'
-        : (p.so || '').includes('Server') ? 'Server'
-        : (p.so || '').includes('Windows 7') ? 'Win 7'
-        : 'Outro';
-      so[soKey] = (so[soKey] || 0) + 1;
       if (p.funcao) funcao[p.funcao] = (funcao[p.funcao] || 0) + 1;
       if (p.estado) estado[p.estado] = (estado[p.estado] || 0) + 1;
       const d = p.disponibilidade || 'outro';
       disponibilidade[d] = (disponibilidade[d] || 0) + 1;
+      const loc = (p.ubicacao || '').trim();
+      if (loc) ubicacao[loc] = (ubicacao[loc] || 0) + 1;
+      const ramGB = (p.memMB || 0) / 1024;
+      const band = ramGB < 8 ? '< 8 GB' : ramGB < 16 ? '8–15 GB' : ramGB < 32 ? '16–31 GB' : ramGB < 64 ? '32–63 GB' : '≥ 64 GB';
+      ramBands[band] = (ramBands[band] || 0) + 1;
+      if (p.ano && Number(p.ano) > 2000) { const yr = String(p.ano); anos[yr] = (anos[yr] || 0) + 1; }
     });
     const now = Date.now();
     const stale = pcs.filter(p => {
@@ -1030,17 +1039,14 @@ const Dashboard = ({ pcs }) => {
       const d = new Date(p.ultComunic.replace(' ', 'T'));
       return (now - d.getTime()) > 30 * 24 * 60 * 60 * 1000;
     }).length;
-    // Review/audit stats
     const reviewBuckets = { recent: 0, ageing: 0, stale: 0, never: 0 };
-    pcs.forEach(p => {
-      const rt = reviewTier(p.lastReview, t);
-      reviewBuckets[rt.key]++;
-    });
-    return { total, buckets, totalRam, totalDisk, so, funcao, estado, disponibilidade, stale, reviewBuckets };
+    pcs.forEach(p => { const rt = reviewTier(p.lastReview, t); reviewBuckets[rt.key]++; });
+    return { total, buckets, totalRam, totalDisk, funcao, estado, disponibilidade, ubicacao, ramBands, anos, stale, reviewBuckets };
   }, [pcs, t, thresholds]);
 
   const tiersSorted = TIERS_ORDER.map(k => buildTier(k, 'total', thresholds, t));
   const needsReview = stats.reviewBuckets.never + stats.reviewBuckets.stale;
+  const nav = (filters) => onNavigate && onNavigate('inventory', filters);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -1048,23 +1054,20 @@ const Dashboard = ({ pcs }) => {
         <Stat label="Total Equipamentos" value={stats.total} sub="UMEC inventory" accent={t.accent} icon={Monitor} />
         <Stat label="Memória Agregada" value={`${Math.round(stats.totalRam / 1024)} GB`} sub="RAM total" accent={t.purple} icon={MemoryStick} />
         <Stat label="Armazenamento" value={`${(stats.totalDisk / 1000).toFixed(1)} TB`} sub="Capacidade total" accent={t.warning} icon={HardDrive} />
-        <Stat label="Sem comunicação" value={stats.stale} sub="> 30 dias" accent={stats.stale > 0 ? t.danger : t.success} icon={AlertTriangle} />
+        <Stat label="Sem comunicação" value={stats.stale} sub="> 30 dias"
+          accent={stats.stale > 0 ? t.danger : t.success} icon={AlertTriangle} />
         <Stat label="A confirmar" value={needsReview}
           sub={`${stats.reviewBuckets.never} nunca · ${stats.reviewBuckets.stale} antigas`}
-          accent={needsReview > 0 ? t.warning : t.success}
-          icon={CheckCircle2} />
+          accent={needsReview > 0 ? t.warning : t.success} icon={CheckCircle2}
+          onClick={needsReview > 0 ? () => nav({ reviewFilter: 'never' }) : undefined} />
       </div>
 
       <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 8, padding: 22, boxShadow: t.shadow }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
           <div>
-            <div style={{
-              fontSize: 11, color: t.textDim, letterSpacing: '0.12em',
-              textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace',
-            }}>Distribuição por nível de performance</div>
-            <div style={{ fontSize: 18, color: t.text, marginTop: 4, fontWeight: 500 }}>
-              Pontuação Total (CPU + GPU)
-            </div>
+            <div style={{ fontSize: 11, color: t.textDim, letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>
+              Distribuição por nível de performance</div>
+            <div style={{ fontSize: 18, color: t.text, marginTop: 4, fontWeight: 500 }}>Pontuação Total (CPU + GPU)</div>
           </div>
           <div style={{ fontSize: 11, color: t.textDim, fontFamily: 'JetBrains Mono, monospace' }}>n = {stats.total}</div>
         </div>
@@ -1075,12 +1078,15 @@ const Dashboard = ({ pcs }) => {
             const pct = (count / stats.total) * 100;
             if (count === 0) return null;
             return (
-              <div key={tier.key} style={{
-                width: `${pct}%`, background: tier.color,
+              <div key={tier.key} onClick={() => nav({ tierFilter: tier.key })} style={{
+                width: `${pct}%`, background: tier.color, cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 12, color: t.name === 'dark' ? '#0a0f17' : '#fff', fontWeight: 700,
-                fontFamily: 'JetBrains Mono, monospace',
-              }}>{count}</div>
+                fontFamily: 'JetBrains Mono, monospace', transition: 'opacity 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.75'; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+              >{count}</div>
             );
           })}
         </div>
@@ -1090,16 +1096,16 @@ const Dashboard = ({ pcs }) => {
             const count = stats.buckets[tier.key];
             const pct = ((count / stats.total) * 100).toFixed(1);
             return (
-              <div key={tier.key} style={{
+              <div key={tier.key} onClick={() => nav({ tierFilter: tier.key })} style={{
                 padding: 12, borderRadius: 6, background: t.bgPanelAlt,
-                border: `1px solid ${tier.color}30`,
-              }}>
+                border: `1px solid ${tier.color}30`, cursor: 'pointer', transition: 'border-color 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = tier.color; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = `${tier.color}30`; }}
+              >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: tier.dot }} />
-                  <span style={{
-                    fontSize: 11, color: t.textSecondary, textTransform: 'uppercase',
-                    letterSpacing: '0.08em', fontFamily: 'JetBrains Mono, monospace',
-                  }}>{tier.label}</span>
+                  <span style={{ fontSize: 11, color: t.textSecondary, textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'JetBrains Mono, monospace' }}>{tier.label}</span>
                 </div>
                 <div style={{ fontSize: 22, color: tier.color, fontWeight: 700, fontFamily: 'JetBrains Mono, monospace' }}>
                   {count} <span style={{ fontSize: 12, color: t.textDim }}>({pct}%)</span>
@@ -1111,16 +1117,24 @@ const Dashboard = ({ pcs }) => {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14 }}>
-        <BreakdownCard title="Sistema Operativo" data={stats.so} />
-        <BreakdownCard title="Função do Utilizador" data={stats.funcao} labelMap={funcaoLabels} />
-        <BreakdownCard title="Estado" data={stats.estado} />
-        <BreakdownCard title="Disponibilidade" data={stats.disponibilidade} labelMap={DISPONIBILIDADE_LABELS} />
+        <BreakdownCard title="Função do Utilizador" data={stats.funcao} labelMap={funcaoLabels}
+          onRowClick={f => nav({ funcaoFilter: f })} />
+        <BreakdownCard title="Estado" data={stats.estado}
+          onRowClick={e => nav({ estadoFilter: e })} />
+        <BreakdownCard title="Disponibilidade" data={stats.disponibilidade} labelMap={DISPONIBILIDADE_LABELS}
+          onRowClick={d => nav({ disponibilidadeFilter: d })} />
+        <BreakdownCard title="Localização" data={stats.ubicacao}
+          onRowClick={loc => nav({ ubicacaoFilter: loc })} />
+        <BreakdownCard title="RAM por Banda" data={stats.ramBands} />
+        <BreakdownCard title="Ano de Compra" data={stats.anos} />
+        <BreakdownCard title="Estado de Revisão" data={stats.reviewBuckets} labelMap={REVIEW_BREAKDOWN_LABELS}
+          onRowClick={k => nav({ reviewFilter: k })} />
       </div>
     </div>
   );
 };
 
-const BreakdownCard = ({ title, data, labelMap = {} }) => {
+const BreakdownCard = ({ title, data, labelMap = {}, onRowClick }) => {
   const t = useTheme();
   const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
   const max = Math.max(...entries.map(e => e[1]), 1);
@@ -1133,7 +1147,17 @@ const BreakdownCard = ({ title, data, labelMap = {} }) => {
       }}>{title}</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {entries.slice(0, 8).map(([key, count]) => (
-          <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div key={key}
+            onClick={onRowClick ? () => onRowClick(key) : undefined}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 10,
+              cursor: onRowClick ? 'pointer' : 'default',
+              borderRadius: 4, padding: '2px 4px', margin: '-2px -4px',
+              transition: 'background 0.12s',
+            }}
+            onMouseEnter={onRowClick ? e => { e.currentTarget.style.background = t.bgPanelAlt; } : undefined}
+            onMouseLeave={onRowClick ? e => { e.currentTarget.style.background = 'transparent'; } : undefined}
+          >
             <div style={{ fontSize: 12, color: t.textSecondary, minWidth: 100, fontWeight: 500 }}>
               {labelMap[key] || key}
             </div>
@@ -1156,7 +1180,7 @@ const BreakdownCard = ({ title, data, labelMap = {} }) => {
 };
 
 // ===== Inventory table =====
-const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm }) => {
+const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm, navFilters, navSeq }) => {
   const t = useTheme();
   const thresholds = useThresholdsCtx();
   const { allLabels: funcaoLabels } = useFunctions();
@@ -1167,11 +1191,24 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm }) => {
   const [estadoFilter, setEstadoFilter] = useState('all');
   const [reviewFilter, setReviewFilter] = useState('all');
   const [disponibilidadeFilter, setDisponibilidadeFilter] = useState('all');
+  const [ubicacaoFilter, setUbicacaoFilter] = useState('all');
   const [sortBy, setSortBy] = useState('rank');
   const [sortDir, setSortDir] = useState('asc');
 
+  useEffect(() => {
+    if (!navSeq) return;
+    setTierFilter(navFilters.tierFilter || 'all');
+    setFuncaoFilter(navFilters.funcaoFilter || 'all');
+    setEstadoFilter(navFilters.estadoFilter || 'all');
+    setReviewFilter(navFilters.reviewFilter || 'all');
+    setDisponibilidadeFilter(navFilters.disponibilidadeFilter || 'all');
+    setUbicacaoFilter(navFilters.ubicacaoFilter || 'all');
+    setSearch(navFilters.search || '');
+  }, [navSeq]);
+
   const funcoes = useMemo(() => [...new Set(pcs.map(p => p.funcao).filter(Boolean))].sort(), [pcs]);
   const estados = useMemo(() => [...new Set(pcs.map(p => p.estado).filter(Boolean))].sort(), [pcs]);
+  const ubicacoes = useMemo(() => [...new Set(pcs.map(p => (p.ubicacao || '').trim()).filter(Boolean))].sort(), [pcs]);
 
   const filtered = useMemo(() => {
     let result = pcs.filter(p => {
@@ -1193,6 +1230,7 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm }) => {
         const d = p.disponibilidade || 'outro';
         if (d !== disponibilidadeFilter) return false;
       }
+      if (ubicacaoFilter !== 'all' && (p.ubicacao || '').trim() !== ubicacaoFilter) return false;
       return true;
     });
     result.sort((a, b) => {
@@ -1216,7 +1254,7 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm }) => {
       return 0;
     });
     return result;
-  }, [pcs, search, tierFilter, funcaoFilter, estadoFilter, reviewFilter, disponibilidadeFilter, sortBy, sortDir, t, thresholds]);
+  }, [pcs, search, tierFilter, funcaoFilter, estadoFilter, reviewFilter, disponibilidadeFilter, ubicacaoFilter, sortBy, sortDir, t, thresholds]);
 
   const toggleSort = (col) => {
     if (sortBy === col) setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
@@ -1286,6 +1324,10 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm }) => {
         <FilterSelect value={disponibilidadeFilter} onChange={setDisponibilidadeFilter} options={[
           { v: 'all', l: 'Toda a disponibilidade' },
           ...DISPONIBILIDADE_VALUES.map(d => ({ v: d, l: DISPONIBILIDADE_LABELS[d] })),
+        ]} />
+        <FilterSelect value={ubicacaoFilter} onChange={setUbicacaoFilter} options={[
+          { v: 'all', l: 'Todas as localizações' },
+          ...ubicacoes.map(u => ({ v: u, l: u })),
         ]} />
 
         <button onClick={onAdd} style={btn.primary}>
@@ -3499,6 +3541,9 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
   const { pcs, setPcs, loaded, lastSaved, reset } = useStorage();
   const { items: peripherals, setItems: setPeripherals, loaded: periphLoaded } = usePeripheralsStorage();
   const [view, setView] = useState('dashboard');
+  const [navFilters, setNavFilters] = useState({});
+  const [navSeq, setNavSeq] = useState(0);
+  const handleDashNavigate = (v, filters = {}) => { setView(v); setNavFilters(filters); setNavSeq(s => s + 1); };
   const [editing, setEditing] = useState(null);
   const [isNewEdit, setIsNewEdit] = useState(false);
   const [confirmDel, setConfirmDel] = useState(null);
@@ -3660,13 +3705,14 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
       />
 
       <main style={{ maxWidth: 1600, margin: '0 auto', padding: 24 }}>
-        {view === 'dashboard' && <Dashboard pcs={pcs} />}
+        {view === 'dashboard' && <Dashboard pcs={pcs} onNavigate={handleDashNavigate} />}
         {view === 'inventory' && (
           <Inventory pcs={pcs}
             onEdit={(p) => { setEditing(p); setIsNewEdit(false); }}
             onDelete={(p) => setConfirmDel(p)}
             onAdd={() => { setIsNewEdit(true); setEditing({}); }}
-            onConfirm={handleConfirmReview} />
+            onConfirm={handleConfirmReview}
+            navFilters={navFilters} navSeq={navSeq} />
         )}
         {view === 'peripherals' && (
           <Peripherals items={peripherals}
