@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INEGI · UMEC — Confirmação de Equipamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0f17; --panel: #111827; --panel2: #0f172a; --border: #1e3a5f;
+    --text: #e2e8f0; --dim: #64748b; --accent: #22d3ee; --success: #34d399;
+    --warning: #f59e0b; --danger: #f87171; --radius: 8px;
+  }
+  html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; }
+  body { display: flex; flex-direction: column; align-items: center; padding: 32px 16px 64px; }
+
+  /* Layout */
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 100%; max-width: 620px; }
+  .card + .card { margin-top: 16px; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 14px;
+  }
+
+  /* Header */
+  .header { width: 100%; max-width: 620px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .logo { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; }
+  .logo span { color: var(--dim); }
+
+  /* PC info */
+  .pc-name { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .pc-user { font-size: 13px; color: var(--dim); margin-bottom: 12px; }
+  .specs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .spec-chip {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 8px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 4px; color: #94a3b8;
+  }
+
+  /* Form */
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .field input[type=text], .field input[type=number], .field textarea, .field select {
+    width: 100%; padding: 10px 12px; background: var(--panel2); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;
+    outline: none; transition: border-color .15s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 80px; }
+  select option { background: var(--panel2); }
+
+  /* Radio / checkbox groups */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 6px;
+    cursor: pointer; transition: border-color .15s; user-select: none;
+  }
+  .choice:hover { border-color: var(--accent); }
+  .choice input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+  .choice-label { font-size: 13px; color: var(--text); }
+  .choice.selected { border-color: var(--accent); background: #22d3ee0d; }
+
+  /* Checkbox confirm */
+  .confirm-check {
+    display: flex; align-items: center; gap: 12px; padding: 14px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+  }
+  .confirm-check input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+  .confirm-check .check-label { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  /* Periféricos list */
+  .periph-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .periph-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 5px;
+    font-size: 12px; font-family: 'JetBrains Mono', monospace; color: #94a3b8;
+  }
+  .periph-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+  .no-periph { font-size: 12px; color: var(--dim); font-style: italic; }
+
+  /* Button */
+  .btn-primary {
+    width: 100%; padding: 14px; background: var(--accent); color: #0a0f17;
+    border: none; border-radius: 6px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+    cursor: pointer; transition: opacity .15s; margin-top: 8px;
+  }
+  .btn-primary:hover { opacity: .85; }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* States */
+  .state-center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; text-align: center; color: var(--dim); }
+  .state-icon { font-size: 48px; }
+  .state-title { font-size: 18px; font-weight: 600; color: var(--text); }
+  .state-sub { font-size: 13px; color: var(--dim); max-width: 360px; line-height: 1.6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+
+  /* Already confirmed banner */
+  .banner { padding: 10px 14px; border-radius: 6px; font-size: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .banner.info { background: #22d3ee14; border: 1px solid #22d3ee40; color: var(--accent); }
+
+  @media (max-width: 480px) {
+    body { padding: 16px 12px 48px; }
+    .card { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+'use strict';
+
+// ── Config ────────────────────────────────────────────────────────────────────
+const SUPABASE_URL     = 'https://potcxtlldjwngvakuvwq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvdGN4dGxsZGp3bmd2YWt1dndxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTAzNTAsImV4cCI6MjA5NDc2NjM1MH0.trnInb0Cybp8mnOc9QmXkWpzJN4K6Mu55VvYVWfXDYQ';
+const APP_ID           = 'equipment';
+const KEY_PCS          = 'inegi:umec:pcs:v2';
+const KEY_PERIPH       = 'inegi:umec:peripherals:v1';
+// ─────────────────────────────────────────────────────────────────────────────
+
+const PERIPH_LABELS = {
+  monitor1: 'Monitor 1', monitor2: 'Monitor 2', monitor3: 'Monitor 3',
+  keyboard: 'Teclado', mouse: 'Rato', headset: 'Headset / Auscultadores',
+  webcam: 'Webcam', docking: 'Docking Station', hub: 'Hub USB',
+  hdmi: 'Cabo HDMI', displayport: 'Cabo DisplayPort', usbc: 'Cabo USB-C',
+  speakers: 'Colunas', printer: 'Impressora', scanner: 'Scanner',
+  ups: 'UPS', tablet: 'Tablet / Digitalizador',
+};
+
+let _db, _pc, _periph;
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtMem(mb) {
+  if (!mb) return '—';
+  const gb = Math.round(mb / 1024);
+  return gb >= 1 ? gb + ' GB' : mb + ' MB';
+}
+
+function describePeripherals(p) {
+  if (!p) return [];
+  const items = [];
+  Object.keys(p).filter(k => k.endsWith('Present') && p[k]).forEach(k => {
+    const base = k.slice(0, -7); // remove 'Present'
+    const label = PERIPH_LABELS[base] || base;
+    const brand = p[base + 'Brand'] || '';
+    const size  = p[base + 'Size']  ? p[base + 'Size'] + '"' : '';
+    const detail = [brand, size].filter(Boolean).join(' ');
+    items.push(label + (detail ? ': ' + detail : ''));
+  });
+  return items;
+}
+
+function render(html) {
+  document.getElementById('app').innerHTML = html;
+}
+
+function logo() {
+  return `<div class="header">
+    <div class="logo">INEGI <span>·</span> UMEC</div>
+    <div style="font-size:11px;color:var(--dim);font-family:'JetBrains Mono',monospace">Confirmação de Inventário</div>
+  </div>`;
+}
+
+// ── States ────────────────────────────────────────────────────────────────────
+function showLoading() {
+  render(`<div class="state-center"><div class="spinner"></div><div style="font-size:13px">A carregar…</div></div>`);
+}
+
+function showError(msg) {
+  render(`${logo()}<div class="state-center">
+    <div class="state-icon">⚠️</div>
+    <div class="state-title">Não foi possível carregar</div>
+    <div class="state-sub">${msg}</div>
+  </div>`);
+}
+
+function showNotFound(pcName) {
+  render(`${logo()}<div class="state-center">
+    <div class="state-icon">🔍</div>
+    <div class="state-title">Equipamento não encontrado</div>
+    <div class="state-sub">O equipamento <strong style="color:var(--text)">${pcName}</strong> não foi encontrado no inventário.<br>Por favor contacte o administrador UMEC.</div>
+  </div>`);
+}
+
+function showSuccess(pcName) {
+  render(`${logo()}<div class="state-center">
+    <div class="state-icon">✅</div>
+    <div class="state-title">Confirmação registada!</div>
+    <div class="state-sub">Obrigado pela confirmação do equipamento <strong style="color:var(--text)">${pcName}</strong>.<br>A informação foi registada com sucesso.</div>
+  </div>`);
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────────
+function showForm(pc, periph, alreadyConfirmed) {
+  const user = (pc.utilizador || '').replace(/^.*\\/, '');
+  const periphItems = describePeripherals(periph);
+
+  const periphSection = periphItems.length
+    ? `<ul class="periph-list">${periphItems.map(i => `<li class="periph-item"><span class="periph-dot"></span>${i}</li>`).join('')}</ul>`
+    : `<p class="no-periph">Nenhum periférico registado para este utilizador.</p>`;
+
+  const alreadyBanner = alreadyConfirmed
+    ? `<div class="banner info">ℹ️ Já confirmou este equipamento anteriormente. Pode submeter novamente para atualizar.</div>` : '';
+
+  render(`
+    ${logo()}
+    ${alreadyBanner}
+
+    <div class="card">
+      <div class="section-label">Equipamento a confirmar</div>
+      <div class="pc-name">${pc.pc}</div>
+      <div class="pc-user">${user ? 'Utilizador: ' + user : 'Sem utilizador registado'}</div>
+      <div class="specs">
+        ${pc.cpuClean ? `<span class="spec-chip">${pc.cpuClean}</span>` : ''}
+        ${pc.memMB    ? `<span class="spec-chip">${fmtMem(pc.memMB)}</span>` : ''}
+        ${pc.gpuClean ? `<span class="spec-chip">${pc.gpuClean.slice(0,40)}</span>` : ''}
+        ${pc.ubicacao ? `<span class="spec-chip">📍 ${pc.ubicacao}</span>` : ''}
+        ${pc.estado   ? `<span class="spec-chip">${pc.estado}</span>` : ''}
+      </div>
+    </div>
+
+    <form id="conf-form">
+      <div class="card">
+        <div class="section-label">Identidade e localização</div>
+
+        <div class="field">
+          <label class="confirm-check" id="user-check-label">
+            <input type="checkbox" id="is-user" name="is_user" value="sim" checked>
+            <span class="check-label">Confirmo que sou o utilizador deste equipamento</span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="ubicacao">Localização atual do equipamento</label>
+          <input type="text" id="ubicacao" name="ubicacao" value="${pc.ubicacao || ''}" placeholder="Ex: LUGAR, LAB, SERV ROOM, Gabinete…">
+        </div>
+
+        <div class="field">
+          <label for="ano">Ano de aquisição <span style="color:var(--dim);font-weight:400">(se souber)</span></label>
+          <input type="number" id="ano" name="ano" value="${pc.ano || ''}" placeholder="Ex: 2022" min="2000" max="2030" style="max-width:120px">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-label">Estado do equipamento</div>
+        <div class="choices" id="estado-group">
+          ${[
+            ['ok',       'Funciona sem problemas'],
+            ['minor',    'Tem alguns problemas menores'],
+            ['major',    'Apresenta problemas graves'],
+            ['broken',   'Não funciona'],
+          ].map(([v, l], i) => `
+            <label class="choice${i===0?' selected':''}">
+              <input type="radio" name="estado_report" value="${v}" ${i===0?'checked':''}>
+              <span class="choice-label">${l}</span>
+            </label>`).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-label">Disponibilidade</div>
+        <div class="choices" id="disp-group">
+          ${[
+            ['ocupado',     'Em uso — é o meu equipamento de trabalho'],
+            ['disponivel',  'Disponível para redistribuição'],
+          ].map(([v, l], i) => `
+            <label class="choice${pc.disponibilidade===v||(!pc.disponibilidade&&i===0)?' selected':''}">
+              <input type="radio" name="disponibilidade" value="${v}" ${pc.disponibilidade===v||(!pc.disponibilidade&&i===0)?'checked':''}>
+              <span class="choice-label">${l}</span>
+            </label>`).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-label">Periféricos registados</div>
+        ${periphSection}
+        <div class="field" style="margin-top:16px;margin-bottom:0">
+          <label for="periph-notes">Correções ou observações sobre periféricos</label>
+          <textarea id="periph-notes" name="periph_notes" placeholder="Ex: Não tenho o monitor 2 · O rato é pessoal · Preciso de docking station…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-label">Observações adicionais</div>
+        <div class="field" style="margin-bottom:0">
+          <textarea name="notes" placeholder="Qualquer outra informação relevante sobre o equipamento…"></textarea>
+        </div>
+      </div>
+
+      <div style="max-width:620px;width:100%;margin-top:4px">
+        <button type="submit" class="btn-primary" id="submit-btn">Confirmar Equipamento</button>
+        <div id="submit-msg" style="text-align:center;font-size:12px;color:var(--dim);margin-top:10px;display:none"></div>
+      </div>
+    </form>
+  `);
+
+  // Highlight selected radio choices
+  document.querySelectorAll('.choice input[type=radio]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const group = radio.closest('.choices');
+      group.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+      radio.closest('.choice').classList.add('selected');
+    });
+  });
+
+  // Form submit
+  document.getElementById('conf-form').addEventListener('submit', handleSubmit);
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const msg = document.getElementById('submit-msg');
+  btn.disabled = true;
+  btn.textContent = 'A enviar…';
+  msg.style.display = 'none';
+
+  const fd = new FormData(e.target);
+  const payload = {
+    pc:              _pc.pc,
+    utilizador:      _pc.utilizador || null,
+    is_user_confirmed: fd.get('is_user') === 'sim',
+    ubicacao:        fd.get('ubicacao') || null,
+    ano_compra:      fd.get('ano') ? Number(fd.get('ano')) : null,
+    estado_reportado: fd.get('estado_report'),
+    disponibilidade: fd.get('disponibilidade'),
+    periph_notes:    fd.get('periph_notes') || null,
+    notes:           fd.get('notes') || null,
+  };
+
+  try {
+    const { error } = await _db.from('equipment_confirmations').insert(payload);
+    if (error) throw error;
+    showSuccess(_pc.pc);
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.textContent = 'Confirmar Equipamento';
+    msg.style.display = 'block';
+    msg.style.color = 'var(--danger)';
+    msg.textContent = 'Erro ao enviar. Por favor tente novamente ou contacte o administrador.';
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  showLoading();
+
+  const params  = new URLSearchParams(location.search);
+  const pcName  = params.get('pc');
+  if (!pcName) return showError('Link inválido — parâmetro <code>?pc=</code> em falta.<br>Por favor contacte o administrador UMEC.');
+
+  _db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  try {
+    // Load PCs
+    const { data: pcsRec, error: e1 } = await _db.from('app_storage').select('value')
+      .eq('app_id', APP_ID).eq('key', KEY_PCS).maybeSingle();
+    if (e1) throw e1;
+
+    const pcs = pcsRec ? JSON.parse(pcsRec.value) : [];
+    _pc = pcs.find(p => p.pc === decodeURIComponent(pcName));
+    if (!_pc) return showNotFound(decodeURIComponent(pcName));
+
+    // Load peripherals
+    const { data: periphRec } = await _db.from('app_storage').select('value')
+      .eq('app_id', APP_ID).eq('key', KEY_PERIPH).maybeSingle();
+    if (periphRec) {
+      const allPeriph = JSON.parse(periphRec.value);
+      const uLow = (_pc.utilizador || '').toLowerCase();
+      _periph = allPeriph.find(p => {
+        const pLow = (p.utilizador || '').toLowerCase();
+        return pLow === uLow || uLow.endsWith('\\' + pLow) || pLow.endsWith('\\' + uLow.split('\\').pop());
+      }) || null;
+    }
+
+    // Check prior confirmation
+    const { data: prior } = await _db.from('equipment_confirmations')
+      .select('confirmed_at').eq('pc', _pc.pc).order('confirmed_at', { ascending: false }).limit(1);
+    const alreadyConfirmed = prior && prior.length > 0;
+
+    showForm(_pc, _periph, alreadyConfirmed);
+  } catch (err) {
+    console.error(err);
+    showError('Não foi possível carregar os dados do inventário.<br>Por favor tente novamente mais tarde.');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
