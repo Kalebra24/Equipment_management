@@ -25,7 +25,7 @@
   .logo { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: .1em; }
   .logo span { color: var(--dim); }
 
-  .pc-name { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .pc-name { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .pc-user { font-size: 13px; color: var(--dim); margin-bottom: 12px; }
   .specs { display: flex; flex-wrap: wrap; gap: 8px; }
   .spec-chip { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 8px; background: var(--panel2); border: 1px solid var(--border); border-radius: 4px; color: #94a3b8; }
@@ -48,41 +48,49 @@
 
   .confirm-check { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; }
   .confirm-check input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
-  .confirm-check .check-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .confirm-check .check-label { font-size: 13px; font-weight: 500; }
 
-  /* Peripheral registration */
-  .periph-reg-item { display: flex; flex-direction: column; gap: 0; }
+  /* Peripheral form */
+  .periph-reg-item { display: flex; flex-direction: column; }
   .periph-check { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; user-select: none; transition: border-color .15s; }
   .periph-check:hover { border-color: var(--accent); }
-  .periph-check.checked { border-color: var(--accent); background: #22d3ee0d; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: var(--border); }
+  .periph-check.checked { border-color: var(--accent); background: #22d3ee0d; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
   .periph-check input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
   .periph-check-label { font-size: 13px; color: var(--text); font-weight: 500; }
-  .periph-detail { display: none; padding: 12px 14px; background: var(--panel2); border: 1px solid var(--accent); border-top: none; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .periph-detail {
+    display: none; padding: 10px 14px 12px; background: var(--panel2);
+    border: 1px solid var(--accent); border-top: none;
+    border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+    gap: 8px; flex-wrap: wrap; align-items: center;
+  }
   .periph-detail input[type=text], .periph-detail input[type=number] {
-    flex: 1; min-width: 130px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: 5px; color: var(--text); font-size: 12px; font-family: 'Inter', sans-serif; outline: none;
+    flex: 1; min-width: 120px; padding: 7px 10px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 5px; color: var(--text);
+    font-size: 12px; font-family: 'Inter', sans-serif; outline: none;
   }
   .periph-detail input:focus { border-color: var(--accent); }
+  .periph-detail select {
+    padding: 7px 10px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; color: var(--text); font-size: 12px;
+    font-family: 'JetBrains Mono', monospace; outline: none; cursor: pointer; min-width: 140px;
+  }
+  .periph-detail select:focus { border-color: var(--accent); }
+  .periph-detail select option { background: var(--panel2); }
   .periph-personal { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dim); white-space: nowrap; cursor: pointer; }
   .periph-personal input { accent-color: var(--accent); width: 13px; height: 13px; cursor: pointer; }
-
-  .periph-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-  .periph-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--border); border-radius: 5px; font-size: 12px; font-family: 'JetBrains Mono', monospace; color: #94a3b8; }
-  .periph-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
-  .no-periph { font-size: 12px; color: var(--dim); font-style: italic; }
 
   .btn-primary { width: 100%; padding: 14px; background: var(--accent); color: #0a0f17; border: none; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; cursor: pointer; transition: opacity .15s; margin-top: 8px; }
   .btn-primary:hover { opacity: .85; }
   .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
 
-  .state-center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; text-align: center; color: var(--dim); }
+  .state-center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; text-align: center; }
   .state-icon { font-size: 48px; }
-  .state-title { font-size: 18px; font-weight: 600; color: var(--text); }
+  .state-title { font-size: 18px; font-weight: 600; }
   .state-sub { font-size: 13px; color: var(--dim); max-width: 360px; line-height: 1.6; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spinner { width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
 
-  .banner { padding: 10px 14px; border-radius: 6px; font-size: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .banner { padding: 10px 14px; border-radius: 6px; font-size: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; line-height: 1.5; }
   .banner.info { background: #22d3ee14; border: 1px solid #22d3ee40; color: var(--accent); }
   .banner.warn { background: #f59e0b14; border: 1px solid #f59e0b40; color: var(--warning); }
 
@@ -100,42 +108,27 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const APP_ID            = 'equipment';
 const KEY_PCS           = 'inegi:umec:pcs:v2';
 const KEY_PERIPH        = 'inegi:umec:peripherals:v1';
-// ─────────────────────────────────────────────────────────────────────────────
 
 const FULL_PERIPHERALS = [
-  { key: 'rato',       label: 'Rato',                      canBePersonal: true  },
-  { key: 'teclado',    label: 'Teclado',                   canBePersonal: true  },
-  { key: 'headphones', label: 'Headphones / Auscultadores', canBePersonal: true  },
+  { key: 'rato',       label: 'Rato',                       canBePersonal: true },
+  { key: 'teclado',    label: 'Teclado',                    canBePersonal: true },
+  { key: 'headphones', label: 'Headphones / Auscultadores', canBePersonal: true },
 ];
 const CHECK_PERIPHERALS = [
   { key: 'basePortatil', label: 'Base para Portátil' },
   { key: 'hub',          label: 'Hub USB'            },
   { key: 'camera',       label: 'Câmara Externa'     },
 ];
+const STATUS_OPTS = [
+  ['GOOD',       'Bom estado'      ],
+  ['ACCEPTABLE', 'Estado aceitável'],
+  ['TBR',        'A substituir'    ],
+];
 
-let _db, _pc, _periph, _periphIsNew;
+let _db, _pc, _periph;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function fmtMem(mb) {
-  if (!mb) return '—';
-  return Math.round(mb / 1024) + ' GB';
-}
-
-function describePeripherals(p) {
-  if (!p) return [];
-  const LABELS = { monitor1: 'Monitor 1', monitor2: 'Monitor 2', rato: 'Rato', teclado: 'Teclado', headphones: 'Headphones', basePortatil: 'Base Portátil', hub: 'Hub USB', camera: 'Câmara' };
-  const items = [];
-  Object.keys(p).filter(k => k.endsWith('Present') && p[k]).forEach(k => {
-    const base = k.slice(0, -7);
-    const label = LABELS[base] || base;
-    const brand = p[base + 'Brand'] || '';
-    const size  = p[base + 'Size']  ? p[base + 'Size'] + '"' : '';
-    const personal = p[base + 'Personal'] ? ' (pessoal)' : '';
-    const detail = [brand, size].filter(Boolean).join(' ');
-    items.push(label + (detail ? ': ' + detail : '') + personal);
-  });
-  return items;
-}
+const fmtMem = (mb) => mb ? Math.round(mb / 1024) + ' GB' : '—';
 
 function render(html) { document.getElementById('app').innerHTML = html; }
 
@@ -148,110 +141,101 @@ function logo() {
 
 // ── States ────────────────────────────────────────────────────────────────────
 function showLoading() {
-  render(`<div class="state-center"><div class="spinner"></div><div style="font-size:13px">A carregar…</div></div>`);
+  render(`<div class="state-center"><div class="spinner"></div><div style="font-size:13px;color:var(--dim)">A carregar…</div></div>`);
 }
 function showError(msg) {
   render(`${logo()}<div class="state-center"><div class="state-icon">⚠️</div><div class="state-title">Não foi possível carregar</div><div class="state-sub">${msg}</div></div>`);
 }
 function showNotFound(name) {
-  render(`${logo()}<div class="state-center"><div class="state-icon">🔍</div><div class="state-title">Equipamento não encontrado</div><div class="state-sub">O equipamento <strong style="color:var(--text)">${name}</strong> não foi encontrado no inventário.<br>Por favor contacte o administrador UMEC.</div></div>`);
+  render(`${logo()}<div class="state-center"><div class="state-icon">🔍</div><div class="state-title">Equipamento não encontrado</div><div class="state-sub">O equipamento <strong style="color:var(--text)">${name}</strong> não foi encontrado.<br>Por favor contacte o administrador UMEC.</div></div>`);
 }
 function showSuccess(pcName, registeredPeriph) {
   render(`${logo()}<div class="state-center">
     <div class="state-icon">✅</div>
     <div class="state-title">Confirmação registada!</div>
-    <div class="state-sub">
-      Obrigado pela confirmação do equipamento <strong style="color:var(--text)">${pcName}</strong>.
-      ${registeredPeriph ? '<br><br>Os seus periféricos foram registados com sucesso.' : ''}
-    </div>
+    <div class="state-sub">Obrigado pela confirmação do equipamento <strong style="color:var(--text)">${pcName}</strong>.
+    ${registeredPeriph ? '<br><br>Os seus periféricos foram registados com sucesso.' : ''}</div>
   </div>`);
 }
 
-// ── Peripheral registration HTML (shown when no record exists) ────────────────
-function periphRegistrationHTML() {
-  const toggle = (id) =>
-    `var el=document.getElementById('${id}d'),cb=document.getElementById('${id}cb');` +
-    `el.style.display=cb.checked?'flex':'none';` +
-    `cb.closest('.periph-check').classList.toggle('checked',cb.checked);`;
+// ── Peripheral form (unified: new registration + update existing) ─────────────
+function periphFormHTML(periph) {
+  const isNew = periph === null;
+  const val   = (k, fb = '') => periph ? (periph[k] != null ? periph[k] : fb) : fb;
+  const chk   = (k) => periph ? !!periph[k] : false;
 
-  const monitorBlock = (n) => `
-    <div class="periph-reg-item">
-      <label class="periph-check" onclick="">
-        <input type="checkbox" name="monitor${n}Present" id="mon${n}cb" onchange="${toggle('mon'+n)}">
+  const toggleFn = (id) =>
+    `(function(cb){var d=document.getElementById('${id}d');d.style.display=cb.checked?'flex':'none';cb.closest('.periph-check').classList.toggle('checked',cb.checked);})(this)`;
+
+  const statusSel = (name, current) =>
+    `<select name="${name}">${STATUS_OPTS.map(([v,l]) =>
+      `<option value="${v}"${(current||'GOOD')===v?' selected':''}>${l}</option>`).join('')}</select>`;
+
+  const monitorBlock = (n) => {
+    const on = chk(`monitor${n}Present`);
+    return `<div class="periph-reg-item">
+      <label class="periph-check${on?' checked':''}">
+        <input type="checkbox" name="monitor${n}Present" id="mon${n}cb" ${on?'checked':''} onchange="${toggleFn('mon'+n)}">
         <span class="periph-check-label">Monitor ${n}</span>
       </label>
-      <div class="periph-detail" id="mon${n}d">
-        <input type="text"   name="monitor${n}Brand" placeholder="Marca (Dell, LG, Samsung…)">
-        <input type="number" name="monitor${n}Size"  placeholder='Tamanho (pol.)' min="10" max="60" style="max-width:140px">
+      <div class="periph-detail" id="mon${n}d" style="display:${on?'flex':'none'}">
+        <input type="text"   name="monitor${n}Brand" placeholder="Marca (Dell, LG…)" value="${val('monitor'+n+'Brand')}">
+        <input type="number" name="monitor${n}Size"  placeholder='Tamanho (pol.)' min="10" max="60" value="${val('monitor'+n+'Size')}" style="max-width:130px">
+        ${statusSel('monitor'+n+'Status', val('monitor'+n+'Status'))}
       </div>
     </div>`;
+  };
 
-  const fullBlock = ({ key, label, canBePersonal }) => `
-    <div class="periph-reg-item">
-      <label class="periph-check" onclick="">
-        <input type="checkbox" name="${key}Present" id="${key}cb" onchange="${toggle(key)}">
+  const fullBlock = ({ key, label, canBePersonal }) => {
+    const on  = chk(key + 'Present');
+    const per = chk(key + 'Personal');
+    return `<div class="periph-reg-item">
+      <label class="periph-check${on?' checked':''}">
+        <input type="checkbox" name="${key}Present" id="${key}cb" ${on?'checked':''} onchange="${toggleFn(key)}">
         <span class="periph-check-label">${label}</span>
       </label>
-      <div class="periph-detail" id="${key}d">
-        <input type="text" name="${key}Brand" placeholder="Marca">
-        ${canBePersonal ? `<label class="periph-personal"><input type="checkbox" name="${key}Personal"> É pessoal (não da empresa)</label>` : ''}
+      <div class="periph-detail" id="${key}d" style="display:${on?'flex':'none'}">
+        <input type="text" name="${key}Brand" placeholder="Marca" value="${val(key+'Brand')}">
+        ${statusSel(key+'Status', val(key+'Status'))}
+        ${canBePersonal ? `<label class="periph-personal"><input type="checkbox" name="${key}Personal" ${per?'checked':''}> É pessoal</label>` : ''}
       </div>
     </div>`;
+  };
 
-  const checkBlock = ({ key, label }) => `
-    <div class="periph-reg-item">
-      <label class="periph-check" onclick="">
-        <input type="checkbox" name="${key}Present" id="${key}cb">
+  const checkBlock = ({ key, label }) => {
+    const on = chk(key + 'Present');
+    return `<div class="periph-reg-item">
+      <label class="periph-check${on?' checked':''}">
+        <input type="checkbox" name="${key}Present" id="${key}cb" ${on?'checked':''}>
         <span class="periph-check-label">${label}</span>
       </label>
     </div>`;
+  };
 
-  return `
-    <div class="card">
-      <div class="section-label">Registo de Periféricos</div>
-      <div class="banner warn" style="margin-bottom:16px">
-        ⚠ Não temos registo dos seus periféricos. Por favor selecione os equipamentos que dispõe.
+  return `<div class="card">
+    <div class="section-label">${isNew ? 'Registo de Periféricos' : 'Periféricos'}</div>
+    ${isNew ? `<div class="banner warn">⚠ Não temos registo dos seus periféricos. Por favor selecione o que dispõe e indique o estado de cada um.</div>` : ''}
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${monitorBlock(1)}
+      ${monitorBlock(2)}
+      ${FULL_PERIPHERALS.map(fullBlock).join('')}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">
+        ${CHECK_PERIPHERALS.map(checkBlock).join('')}
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${monitorBlock(1)}
-        ${monitorBlock(2)}
-        ${FULL_PERIPHERALS.map(fullBlock).join('')}
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">
-          ${CHECK_PERIPHERALS.map(checkBlock).join('')}
-        </div>
-      </div>
-      <div class="field" style="margin-top:16px;margin-bottom:0">
-        <label for="periph-notes">Observações sobre periféricos</label>
-        <textarea id="periph-notes" name="periph_notes" placeholder="Números de série, datas de compra, equipamento em manutenção…"></textarea>
-      </div>
-    </div>`;
+    </div>
+    <div class="field" style="margin-top:16px;margin-bottom:0">
+      <label>Observações sobre periféricos</label>
+      <textarea name="periph_notes" placeholder="Números de série, equipamento em manutenção…">${val('notes')}</textarea>
+    </div>
+  </div>`;
 }
 
 // ── Main form ─────────────────────────────────────────────────────────────────
 function showForm(pc, periph, alreadyConfirmed) {
   const user = (pc.utilizador || '').replace(/^.*\\/, '');
-  const periphItems = describePeripherals(periph);
-  _periphIsNew = periph === null;
 
-  const periphSection = _periphIsNew
-    ? periphRegistrationHTML()
-    : `<div class="card">
-        <div class="section-label">Periféricos registados</div>
-        ${periphItems.length
-          ? `<ul class="periph-list">${periphItems.map(i => `<li class="periph-item"><span class="periph-dot"></span>${i}</li>`).join('')}</ul>`
-          : `<p class="no-periph">Sem periféricos registados para este utilizador.</p>`}
-        <div class="field" style="margin-top:16px;margin-bottom:0">
-          <label for="periph-notes">Correções ou observações sobre periféricos</label>
-          <textarea id="periph-notes" name="periph_notes" placeholder="Ex: Não tenho o monitor 2 · O rato é pessoal · Preciso de docking station…"></textarea>
-        </div>
-      </div>`;
-
-  const alreadyBanner = alreadyConfirmed
-    ? `<div class="banner info">ℹ️ Já confirmou este equipamento anteriormente. Pode submeter novamente para atualizar.</div>` : '';
-
-  render(`
-    ${logo()}
-    ${alreadyBanner}
+  render(`${logo()}
+    ${alreadyConfirmed ? `<div class="banner info">ℹ️ Já confirmou este equipamento anteriormente. Pode submeter novamente para atualizar.</div>` : ''}
 
     <div class="card">
       <div class="section-label">Equipamento a confirmar</div>
@@ -262,7 +246,6 @@ function showForm(pc, periph, alreadyConfirmed) {
         ${pc.memMB    ? `<span class="spec-chip">${fmtMem(pc.memMB)}</span>` : ''}
         ${pc.gpuClean ? `<span class="spec-chip">${pc.gpuClean.slice(0,40)}</span>` : ''}
         ${pc.ubicacao ? `<span class="spec-chip">📍 ${pc.ubicacao}</span>` : ''}
-        ${pc.estado   ? `<span class="spec-chip">${pc.estado}</span>` : ''}
       </div>
     </div>
 
@@ -277,7 +260,7 @@ function showForm(pc, periph, alreadyConfirmed) {
         </div>
         <div class="field">
           <label for="ubicacao">Localização atual do equipamento</label>
-          <input type="text" id="ubicacao" name="ubicacao" value="${pc.ubicacao || ''}" placeholder="Ex: LUGAR, LAB, SERV ROOM, Gabinete…">
+          <input type="text" id="ubicacao" name="ubicacao" value="${pc.ubicacao || ''}" placeholder="Ex: LUGAR, LAB, SERV ROOM…">
         </div>
         <div class="field">
           <label for="ano">Ano de aquisição <span style="color:var(--dim);font-weight:400">(se souber)</span></label>
@@ -287,9 +270,9 @@ function showForm(pc, periph, alreadyConfirmed) {
 
       <div class="card">
         <div class="section-label">Estado do equipamento</div>
-        <div class="choices" id="estado-group">
-          ${[['ok','Funciona sem problemas'],['minor','Tem alguns problemas menores'],['major','Apresenta problemas graves'],['broken','Não funciona']].map(([v,l],i)=>`
-            <label class="choice${i===0?' selected':''}">
+        <div class="choices">
+          ${[['ok','Funciona sem problemas'],['minor','Tem alguns problemas menores'],['major','Apresenta problemas graves'],['broken','Não funciona']].map(([v,l],i)=>
+            `<label class="choice${i===0?' selected':''}">
               <input type="radio" name="estado_report" value="${v}" ${i===0?'checked':''}>
               <span class="choice-label">${l}</span>
             </label>`).join('')}
@@ -299,15 +282,15 @@ function showForm(pc, periph, alreadyConfirmed) {
       <div class="card">
         <div class="section-label">Disponibilidade</div>
         <div class="choices">
-          ${[['ocupado','Em uso — é o meu equipamento de trabalho'],['disponivel','Disponível para redistribuição']].map(([v,l])=>`
-            <label class="choice${(pc.disponibilidade||'ocupado')===v?' selected':''}">
+          ${[['ocupado','Em uso — é o meu equipamento de trabalho'],['disponivel','Disponível para redistribuição']].map(([v,l])=>
+            `<label class="choice${(pc.disponibilidade||'ocupado')===v?' selected':''}">
               <input type="radio" name="disponibilidade" value="${v}" ${(pc.disponibilidade||'ocupado')===v?'checked':''}>
               <span class="choice-label">${l}</span>
             </label>`).join('')}
         </div>
       </div>
 
-      ${periphSection}
+      ${periphFormHTML(periph)}
 
       <div class="card">
         <div class="section-label">Observações adicionais</div>
@@ -320,10 +303,8 @@ function showForm(pc, periph, alreadyConfirmed) {
         <button type="submit" class="btn-primary" id="submit-btn">Confirmar Equipamento</button>
         <div id="submit-msg" style="text-align:center;font-size:12px;margin-top:10px;display:none"></div>
       </div>
-    </form>
-  `);
+    </form>`);
 
-  // Highlight selected radio
   document.querySelectorAll('.choice input[type=radio]').forEach(r => {
     r.addEventListener('change', () => {
       r.closest('.choices').querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
@@ -334,32 +315,32 @@ function showForm(pc, periph, alreadyConfirmed) {
   document.getElementById('conf-form').addEventListener('submit', handleSubmit);
 }
 
-// ── Build peripheral record from form data ────────────────────────────────────
+// ── Build peripheral record ───────────────────────────────────────────────────
 function buildPeriphRecord(fd) {
-  const bool = (k) => fd.get(k) === 'on' || fd.get(k) === true || !!fd.get(k);
+  const bool = (k) => !!fd.get(k);
   return {
-    id:               'p_' + Date.now(),
-    utilizador:       _pc.utilizador || '',
-    notes:            fd.get('periph_notes') || '',
-    monitor1Present:  bool('monitor1Present'),
-    monitor1Brand:    fd.get('monitor1Brand') || '',
-    monitor1Size:     fd.get('monitor1Size')  || '',
-    monitor1Status:   'GOOD',
-    monitor2Present:  bool('monitor2Present'),
-    monitor2Brand:    fd.get('monitor2Brand') || '',
-    monitor2Size:     fd.get('monitor2Size')  || '',
-    monitor2Status:   'GOOD',
+    id:   _periph ? _periph.id : ('p_' + Date.now()),
+    utilizador: _pc.utilizador || '',
+    notes: fd.get('periph_notes') || '',
+    monitor1Present: bool('monitor1Present'),
+    monitor1Brand:   fd.get('monitor1Brand')   || '',
+    monitor1Size:    fd.get('monitor1Size')    || '',
+    monitor1Status:  fd.get('monitor1Status')  || 'GOOD',
+    monitor2Present: bool('monitor2Present'),
+    monitor2Brand:   fd.get('monitor2Brand')   || '',
+    monitor2Size:    fd.get('monitor2Size')    || '',
+    monitor2Status:  fd.get('monitor2Status')  || 'GOOD',
     ratoPresent:      bool('ratoPresent'),
-    ratoBrand:        fd.get('ratoBrand')     || '',
-    ratoStatus:       'GOOD',
+    ratoBrand:        fd.get('ratoBrand')        || '',
+    ratoStatus:       fd.get('ratoStatus')       || 'GOOD',
     ratoPersonal:     bool('ratoPersonal'),
     tecladoPresent:   bool('tecladoPresent'),
-    tecladoBrand:     fd.get('tecladoBrand')  || '',
-    tecladoStatus:    'GOOD',
+    tecladoBrand:     fd.get('tecladoBrand')     || '',
+    tecladoStatus:    fd.get('tecladoStatus')    || 'GOOD',
     tecladoPersonal:  bool('tecladoPersonal'),
     headphonesPresent:  bool('headphonesPresent'),
-    headphonesBrand:    fd.get('headphonesBrand') || '',
-    headphonesStatus:   'GOOD',
+    headphonesBrand:    fd.get('headphonesBrand')    || '',
+    headphonesStatus:   fd.get('headphonesStatus')   || 'GOOD',
     headphonesPersonal: bool('headphonesPersonal'),
     basePortatilPresent: bool('basePortatilPresent'),
     hubPresent:          bool('hubPresent'),
@@ -367,28 +348,19 @@ function buildPeriphRecord(fd) {
   };
 }
 
-// ── Save peripheral record to app_storage ─────────────────────────────────────
+// ── Save peripherals to app_storage ──────────────────────────────────────────
 async function savePeripheralRecord(fd) {
-  const newRec = buildPeriphRecord(fd);
-
+  const rec = buildPeriphRecord(fd);
   const { data: stored } = await _db.from('app_storage').select('value')
     .eq('app_id', APP_ID).eq('key', KEY_PERIPH).maybeSingle();
-
   const all = stored ? JSON.parse(stored.value) : [];
   const uLow = (_pc.utilizador || '').toLowerCase();
   const idx = all.findIndex(p => {
     const pLow = (p.utilizador || '').toLowerCase();
-    return pLow === uLow
-      || uLow.endsWith('\\' + pLow)
-      || pLow.endsWith('\\' + uLow.split('\\').pop());
+    return pLow === uLow || uLow.endsWith('\\' + pLow) || pLow.endsWith('\\' + uLow.split('\\').pop());
   });
-
-  if (idx >= 0) {
-    all[idx] = { ...all[idx], ...newRec, id: all[idx].id };
-  } else {
-    all.push(newRec);
-  }
-
+  if (idx >= 0) { all[idx] = { ...all[idx], ...rec, id: all[idx].id }; }
+  else          { all.push(rec); }
   const { error } = await _db.from('app_storage').upsert(
     { app_id: APP_ID, key: KEY_PERIPH, value: JSON.stringify(all), updated_at: new Date().toISOString() },
     { onConflict: 'app_id,key' }
@@ -401,48 +373,44 @@ async function handleSubmit(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
   const msg = document.getElementById('submit-msg');
-  btn.disabled = true;
-  btn.textContent = 'A enviar…';
-  msg.style.display = 'none';
-
+  btn.disabled = true; btn.textContent = 'A enviar…'; msg.style.display = 'none';
   const fd = new FormData(e.target);
+  const isNewPeriph = _periph === null;
 
   try {
-    // 1. Save peripheral record if this is a new registration
-    if (_periphIsNew) {
-      await savePeripheralRecord(fd);
-    }
+    // 1. Save / update peripheral record (always)
+    await savePeripheralRecord(fd);
 
-    // 2. Save confirmation record
+    // 2. Insert confirmation audit record
     const { error } = await _db.from('equipment_confirmations').insert({
       pc:               _pc.pc,
       utilizador:       _pc.utilizador || null,
       is_user_confirmed: fd.get('is_user') === 'sim',
-      ubicacao:         fd.get('ubicacao')      || null,
+      ubicacao:         fd.get('ubicacao')     || null,
       ano_compra:       fd.get('ano') ? Number(fd.get('ano')) : null,
       estado_reportado: fd.get('estado_report'),
       disponibilidade:  fd.get('disponibilidade'),
-      periph_notes:     fd.get('periph_notes')  || null,
-      notes:            fd.get('notes')         || null,
+      periph_notes:     fd.get('periph_notes') || null,
+      notes:            fd.get('notes')        || null,
     });
     if (error) throw error;
 
-    // 3. Update PC record in app_storage with confirmed/corrected fields
-    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    // 3. Update PC record: lastReview + corrected fields
+    const today = new Date().toISOString().slice(0, 10);
     const { data: pcsRec } = await _db.from('app_storage').select('value')
       .eq('app_id', APP_ID).eq('key', KEY_PCS).maybeSingle();
     if (pcsRec) {
       const pcs = JSON.parse(pcsRec.value);
       const idx = pcs.findIndex(p => p.pc === _pc.pc);
       if (idx >= 0) {
-        const updates = { lastReview: today };
+        const upd = { lastReview: today };
         const ubicacao = (fd.get('ubicacao') || '').trim();
-        if (ubicacao) updates.ubicacao = ubicacao;
+        if (ubicacao) upd.ubicacao = ubicacao;
         const ano = fd.get('ano') ? Number(fd.get('ano')) : null;
-        if (ano && ano > 2000) updates.ano = ano;
+        if (ano && ano > 2000) upd.ano = ano;
         const disp = fd.get('disponibilidade');
-        if (disp) updates.disponibilidade = disp;
-        pcs[idx] = { ...pcs[idx], ...updates };
+        if (disp) upd.disponibilidade = disp;
+        pcs[idx] = { ...pcs[idx], ...upd };
         await _db.from('app_storage').upsert(
           { app_id: APP_ID, key: KEY_PCS, value: JSON.stringify(pcs), updated_at: new Date().toISOString() },
           { onConflict: 'app_id,key' }
@@ -450,13 +418,11 @@ async function handleSubmit(e) {
       }
     }
 
-    showSuccess(_pc.pc, _periphIsNew);
+    showSuccess(_pc.pc, isNewPeriph);
   } catch (err) {
     console.error(err);
-    btn.disabled = false;
-    btn.textContent = 'Confirmar Equipamento';
-    msg.style.display = 'block';
-    msg.style.color = 'var(--danger)';
+    btn.disabled = false; btn.textContent = 'Confirmar Equipamento';
+    msg.style.display = 'block'; msg.style.color = 'var(--danger)';
     msg.textContent = 'Erro ao enviar. Por favor tente novamente ou contacte o administrador.';
   }
 }
@@ -464,34 +430,28 @@ async function handleSubmit(e) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 async function init() {
   showLoading();
-
   const params = new URLSearchParams(location.search);
   const pcName = params.get('pc');
-  if (!pcName) return showError('Link inválido — parâmetro <code>?pc=</code> em falta.<br>Por favor contacte o administrador UMEC.');
+  if (!pcName) return showError('Link inválido — parâmetro <code>?pc=</code> em falta.');
 
   _db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
   try {
     const { data: pcsRec, error: e1 } = await _db.from('app_storage').select('value')
       .eq('app_id', APP_ID).eq('key', KEY_PCS).maybeSingle();
     if (e1) throw e1;
-
     const pcs = pcsRec ? JSON.parse(pcsRec.value) : [];
     _pc = pcs.find(p => p.pc === decodeURIComponent(pcName));
     if (!_pc) return showNotFound(decodeURIComponent(pcName));
 
     const { data: periphRec } = await _db.from('app_storage').select('value')
       .eq('app_id', APP_ID).eq('key', KEY_PERIPH).maybeSingle();
-
     _periph = null;
     if (periphRec) {
       const all = JSON.parse(periphRec.value);
       const uLow = (_pc.utilizador || '').toLowerCase();
       _periph = all.find(p => {
         const pLow = (p.utilizador || '').toLowerCase();
-        return pLow === uLow
-          || uLow.endsWith('\\' + pLow)
-          || pLow.endsWith('\\' + uLow.split('\\').pop());
+        return pLow === uLow || uLow.endsWith('\\' + pLow) || pLow.endsWith('\\' + uLow.split('\\').pop());
       }) || null;
     }
 
@@ -502,7 +462,7 @@ async function init() {
     showForm(_pc, _periph, prior && prior.length > 0);
   } catch (err) {
     console.error(err);
-    showError('Não foi possível carregar os dados do inventário.<br>Por favor tente novamente mais tarde.');
+    showError('Não foi possível carregar os dados.<br>Por favor tente novamente mais tarde.');
   }
 }
 
