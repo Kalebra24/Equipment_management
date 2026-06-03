@@ -427,7 +427,7 @@ async function handleSubmit(e) {
     });
     if (error) throw error;
 
-    // 3. Update lastReview on the PC record in app_storage
+    // 3. Update PC record in app_storage with confirmed/corrected fields
     const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
     const { data: pcsRec } = await _db.from('app_storage').select('value')
       .eq('app_id', APP_ID).eq('key', KEY_PCS).maybeSingle();
@@ -435,7 +435,14 @@ async function handleSubmit(e) {
       const pcs = JSON.parse(pcsRec.value);
       const idx = pcs.findIndex(p => p.pc === _pc.pc);
       if (idx >= 0) {
-        pcs[idx] = { ...pcs[idx], lastReview: today };
+        const updates = { lastReview: today };
+        const ubicacao = (fd.get('ubicacao') || '').trim();
+        if (ubicacao) updates.ubicacao = ubicacao;
+        const ano = fd.get('ano') ? Number(fd.get('ano')) : null;
+        if (ano && ano > 2000) updates.ano = ano;
+        const disp = fd.get('disponibilidade');
+        if (disp) updates.disponibilidade = disp;
+        pcs[idx] = { ...pcs[idx], ...updates };
         await _db.from('app_storage').upsert(
           { app_id: APP_ID, key: KEY_PCS, value: JSON.stringify(pcs), updated_at: new Date().toISOString() },
           { onConflict: 'app_id,key' }
