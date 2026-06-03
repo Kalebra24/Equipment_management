@@ -427,6 +427,22 @@ async function handleSubmit(e) {
     });
     if (error) throw error;
 
+    // 3. Update lastReview on the PC record in app_storage
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const { data: pcsRec } = await _db.from('app_storage').select('value')
+      .eq('app_id', APP_ID).eq('key', KEY_PCS).maybeSingle();
+    if (pcsRec) {
+      const pcs = JSON.parse(pcsRec.value);
+      const idx = pcs.findIndex(p => p.pc === _pc.pc);
+      if (idx >= 0) {
+        pcs[idx] = { ...pcs[idx], lastReview: today };
+        await _db.from('app_storage').upsert(
+          { app_id: APP_ID, key: KEY_PCS, value: JSON.stringify(pcs), updated_at: new Date().toISOString() },
+          { onConflict: 'app_id,key' }
+        );
+      }
+    }
+
     showSuccess(_pc.pc, _periphIsNew);
   } catch (err) {
     console.error(err);
