@@ -63,14 +63,22 @@ SUPABASE_ANON_KEY = 'eyJ...'</pre>
   const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   window._db = _supabase;
 
+  // Wraps a Supabase query in a timeout so a slow/unreachable server never
+  // blocks the app from loading. Resolves to { data: null, error: null } on timeout.
+  function withTimeout(queryPromise, ms) {
+    return Promise.race([
+      queryPromise,
+      new Promise(resolve => setTimeout(() => resolve({ data: null, error: null }), ms)),
+    ]);
+  }
+
   window.storage = {
     async get(key) {
-      const { data, error } = await _supabase
-        .from('app_storage')
-        .select('value')
-        .eq('app_id', APP_ID)
-        .eq('key', key)
-        .maybeSingle();
+      const { data, error } = await withTimeout(
+        _supabase.from('app_storage').select('value')
+          .eq('app_id', APP_ID).eq('key', key).maybeSingle(),
+        8000
+      );
       if (error) { console.error('storage.get', error); return null; }
       if (!data) return null;
       return { key, value: data.value };
