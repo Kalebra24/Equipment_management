@@ -347,6 +347,20 @@ const PackageCheck = ({ size = 16, color = 'currentColor', className = '', style
     strokeLinecap: 'round', strokeLinejoin: 'round', className, style,
     dangerouslySetInnerHTML: { __html: `<path d="M16 16 l2 2 4-4"/><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/><path d="M7.5 4.27 12 7l4.5-2.73"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/>` }
   });
+const Package = ({ size = 16, color = 'currentColor', className = '', style = {} }) =>
+  React.createElement('svg', {
+    xmlns: 'http://www.w3.org/2000/svg', width: size, height: size,
+    viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 2,
+    strokeLinecap: 'round', strokeLinejoin: 'round', className, style,
+    dangerouslySetInnerHTML: { __html: `<path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/><path d="M7.5 4.27 12 7l4.5-2.73"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/><line x1="16.5" y1="9.4" x2="7.55" y2="4.24"/>` }
+  });
+const UserCheck = ({ size = 16, color = 'currentColor', className = '', style = {} }) =>
+  React.createElement('svg', {
+    xmlns: 'http://www.w3.org/2000/svg', width: size, height: size,
+    viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 2,
+    strokeLinecap: 'round', strokeLinejoin: 'round', className, style,
+    dangerouslySetInnerHTML: { __html: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>` }
+  });
 
 const SEED_DATA = [{"pc":"PORT-DCARDOSO","unidade":"UMEC","utilizador":"INEGI\\dcardoso","ultComunic":"2026-02-27 08:25","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i9-13950HX","cpuClean":"i9-13950HX","cpuScore":45000.0,"memMB":65221.0,"gpu":"NVIDIA RTX 4000 Ada Generation Laptop GPUIntel(R) UHD Graphics","gpuClean":"RTX 4000 Ada Generation Laptop GPUUHD Graphics","gpuScore":17000.0,"disks":"1863GB: NVMe Samsung SSD 980 PRO 2TB954GB: NVMe PC801 NVMe SK hynix 1TB","totalScore":62000.0,"rank":1,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-DDALLI","unidade":"UMEC","utilizador":"INEGI\\jferreira","ultComunic":"2026-02-24 16:02","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 265H","cpuClean":"Ultra 7 265H","cpuScore":49842.0,"memMB":15829.0,"gpu":"NVIDIA RTX PRO 500 Blackwell Generation Laptop GPUIntel(R) Arc(TM) Pro 140T GPU (8GB)","gpuClean":"RTX PRO 500 Blackwell Generation Laptop GPUArc(TM) Pro 140T GPU (8GB)","gpuScore":12000.0,"disks":"477GB: NVMe PM9C1b Samsung 512GB","totalScore":61842.0,"rank":2,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"UMEC-CALC2","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 09:33","so":"Microsoft Windows 10 Enterprise2009","cpu":"Intel(R) Xeon(R) Gold 6248R CPU @ 3.00GHz","cpuClean":"Gold 6248R","cpuScore":38000.0,"memMB":391844.0,"gpu":"Microsoft Remote Display AdapterNVIDIA Quadro RTX 6000","gpuClean":"Microsoft Remote Display AdapterQuadro RTX 6000","gpuScore":19000.0,"disks":"7452GB: TOSHIBA MG06ACA800E932GB: CT1000P1SSD8","totalScore":57000.0,"rank":3,"funcao":"WS","ubicacao":"SERV ROOM","estado":"GOOD"},{"pc":"BCHRISTOFF","unidade":"UMEC","utilizador":"INEGI\\bchristoff","ultComunic":"2026-02-27 09:48","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 265","cpuClean":"Ultra 7 265","cpuScore":49842.0,"memMB":64979.0,"gpu":"NVIDIA RTX A400Intel(R) Graphics","gpuClean":"RTX A400Graphics","gpuScore":5996.0,"disks":"954GB: NVMe PC811 SED SK hynix 1024GB954GB: NVMe PC811 SED SK hynix 1024GB","totalScore":55838.0,"rank":4,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"UMEC-CALC4","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 08:02","so":"Microsoft Windows 10 Enterprise2009","cpu":"Intel(R) Xeon(R) Silver 4316 CPU @ 2.30GHz","cpuClean":"Silver 4316","cpuScore":32556.0,"memMB":261788.0,"gpu":"Microsoft Remote Display AdapterASPEED Graphics Family(WDDM)NVIDIA RTX A4000","gpuClean":"Microsoft Remote Display AdapterASPEED Graphics Family(WDDM)RTX A4000","gpuScore":19464.0,"disks":"894GB: SAMSUNG MZQL2960HCJR-00A07894GB: SAMSUNG MZQL2960HCJR-00A07","totalScore":52020.0,"rank":5,"funcao":"WS","ubicacao":"SERV ROOM","estado":"GOOD"},{"pc":"PMINIGHER","unidade":"UMEC","utilizador":"INEGI\\pminigher","ultComunic":"2026-02-05 14:14","so":"Microsoft Windows 10 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-13700K","cpuClean":"i7-13700K","cpuScore":46451.0,"memMB":16125.0,"gpu":"Intel(R) UHD Graphics 770","gpuClean":"UHD Graphics 770","gpuScore":2600.0,"disks":"932GB: Samsung SSD 980 1TB","totalScore":49051.0,"rank":6,"funcao":"PHD","ubicacao":"AFranc Place","estado":"GOOD"},{"pc":"EDINLER","unidade":"UMEC","utilizador":"INEGI\\edinler","ultComunic":"2026-02-27 09:56","so":"Microsoft Windows 10 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-13700K","cpuClean":"i7-13700K","cpuScore":46451.0,"memMB":16125.0,"gpu":"Intel(R) UHD Graphics 770","gpuClean":"UHD Graphics 770","gpuScore":2600.0,"disks":"932GB: Samsung SSD 980 1TB","totalScore":49051.0,"rank":6,"funcao":"PHD","ubicacao":"UNKNOWN","estado":"GOOD"},{"pc":"AMALVES","unidade":"UMEC","utilizador":"INEGI\\amalves","ultComunic":"2026-02-25 22:22","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":32581.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD Blue SN580 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"GAMORIM","unidade":"UMEC","utilizador":"INEGI\\gamorim","ultComunic":"2026-02-26 17:25","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":32557.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD_BLACK SN770 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"IGONCALVES","unidade":"UMEC","utilizador":"INEGI\\igoncalves","ultComunic":"2026-02-27 02:02","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":65349.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD Blue SN580 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PJCUNHA","unidade":"UMEC","utilizador":"INEGI\\pjcunha","ultComunic":"2026-02-27 04:26","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":65349.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD Blue SN580 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"BMRIBEIRO","unidade":"UMEC","utilizador":"INEGI\\bmribeiro","ultComunic":"2026-02-27 06:33","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":32581.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD Blue SN580 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"CSA","unidade":"UMEC","utilizador":"INEGI\\csa","ultComunic":"2026-02-27 09:43","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":32557.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD_BLACK SN770 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"JPEDRO","unidade":"UMEC","utilizador":"INEGI\\jpedro","ultComunic":"2026-02-27 09:57","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700F","cpuClean":"i7-14700F","cpuScore":41420.0,"memMB":65325.0,"gpu":"NVIDIA RTX A400","gpuClean":"RTX A400","gpuScore":5996.0,"disks":"932GB: WD_BLACK SN770 1TB932GB: WD Blue SA510 2.5 1000GB","totalScore":47416.0,"rank":8,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"JPALVES","unidade":"UMEC","utilizador":"INEGI\\jpalves","ultComunic":"2026-02-27 02:38","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700","cpuClean":"i7-14700","cpuScore":40781.0,"memMB":32455.0,"gpu":"NVIDIA RTX A400Intel(R) UHD Graphics 770","gpuClean":"RTX A400UHD Graphics 770","gpuScore":5996.0,"disks":"954GB: NVMe PC811 SK hynix 1024GB","totalScore":46777.0,"rank":15,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PPEDROSA","unidade":"UMEC","utilizador":"INEGI\\ppedrosa","ultComunic":"2026-02-27 09:59","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) i7-14700","cpuClean":"i7-14700","cpuScore":40781.0,"memMB":32473.0,"gpu":"Intel(R) UHD Graphics 770NVIDIA T400 4GB","gpuClean":"UHD Graphics 770T400 4GB","gpuScore":3800.0,"disks":"954GB: NVMe SK hynix BC901 HFS001TEJ9X108N","totalScore":44581.0,"rank":16,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"UMEC-CALC3","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 05:00","so":"Microsoft Windows 10 Enterprise2009","cpu":"Intel(R) Xeon(R) Gold 6212U CPU @ 2.40GHz","cpuClean":"Gold 6212U","cpuScore":27470.0,"memMB":65173.0,"gpu":"NVIDIA Quadro RTX 4000ASPEED Graphics Family(WDDM)Microsoft Remote Display Adapter","gpuClean":"Quadro RTX 4000ASPEED Graphics Family(WDDM)Microsoft Remote Display Adapter","gpuScore":14877.0,"disks":"954GB: KXG60ZNV1T02 TOSHIBA1863GB: TOSHIBA MG04ACA200E","totalScore":42347.0,"rank":17,"funcao":"WS","ubicacao":"RUBEN","estado":"ACCEPTABLE"},{"pc":"RPEREIRA2","unidade":"UMEC","utilizador":"INEGI\\aleitao","ultComunic":"2026-02-27 06:34","so":"Microsoft Windows 10 Enterprise2009","cpu":"OctaCoreAMD Ryzen 7 5800X 8-Core Processor","cpuClean":"7 5800X 8-Core Processor","cpuScore":27702.0,"memMB":32683.0,"gpu":"NVIDIA Quadro P2200","gpuClean":"Quadro P2200","gpuScore":9409.0,"disks":"466GB: Samsung SSD 970 EVO Plus 500GB932GB: WDC WDS100T2B0C-00PXH0","totalScore":37111.0,"rank":18,"funcao":"ENG","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"REFERREIRA","unidade":"UMEC","utilizador":"INEGI\\referreira","ultComunic":"2026-02-27 09:34","so":"Microsoft Windows 11 Enterprise2009","cpu":"OctaCoreAMD Ryzen 7 5800X 8-Core Processor","cpuClean":"7 5800X 8-Core Processor","cpuScore":27702.0,"memMB":32682.0,"gpu":"NVIDIA Quadro P2200","gpuClean":"Quadro P2200","gpuScore":9409.0,"disks":"466GB: Samsung SSD 970 EVO Plus 500GB932GB: WDC WDS100T2B0C-00PXH0","totalScore":37111.0,"rank":18,"funcao":"ENG","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-ILOPES","unidade":"UMEC","utilizador":"INEGI\\ilopes","ultComunic":"2026-02-18 13:19","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":15829.0,"gpu":"Intel(R) GraphicsNVIDIA RTX 500 Ada Generation Laptop GPU","gpuClean":"GraphicsRTX 500 Ada Generation Laptop GPU","gpuScore":10000.0,"disks":"477GB: NVMe BG6 KIOXIA 512GB","totalScore":36000.0,"rank":20,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-AFALVES","unidade":"UMEC","utilizador":"INEGI\\afalves","ultComunic":"2026-02-27 08:44","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":15829.0,"gpu":"Intel(R) GraphicsNVIDIA RTX 500 Ada Generation Laptop GPU","gpuClean":"GraphicsRTX 500 Ada Generation Laptop GPU","gpuScore":10000.0,"disks":"477GB: NVMe BG6 KIOXIA 512GB","totalScore":36000.0,"rank":20,"funcao":"PHD","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-PPINTO","unidade":"UMEC","utilizador":"INEGI\\ppinto","ultComunic":"2026-02-27 09:51","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":15829.0,"gpu":"Intel(R) GraphicsNVIDIA RTX 500 Ada Generation Laptop GPU","gpuClean":"GraphicsRTX 500 Ada Generation Laptop GPU","gpuScore":10000.0,"disks":"477GB: NVMe PM9C1b Samsung 512GB","totalScore":36000.0,"rank":20,"funcao":"PHD","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-NKLAVZER","unidade":"UMEC","utilizador":"INEGI\\nklavzer","ultComunic":"2026-02-27 09:56","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":15829.0,"gpu":"Intel(R) GraphicsNVIDIA RTX 500 Ada Generation Laptop GPU","gpuClean":"GraphicsRTX 500 Ada Generation Laptop GPU","gpuScore":10000.0,"disks":"477GB: NVMe BG6 KIOXIA 512GB","totalScore":36000.0,"rank":20,"funcao":"PHD","ubicacao":"LUGAR","estado":"NEW"},{"pc":"HYPERION","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 04:17","so":"Microsoft Windows 10 Enterprise2009","cpu":"Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz","cpuClean":"Gold 5220R","cpuScore":30372.0,"memMB":261847.0,"gpu":"NVIDIA T400 4GB","gpuClean":"T400 4GB","gpuScore":3800.0,"disks":"954GB: SAMSUNG MZVL21T0HCLR-00BH13726GB: ST4000DM004-2CV1043726GB: ST4000DM004-2CV104","totalScore":34172.0,"rank":24,"funcao":"WS","ubicacao":"SERV ROOM","estado":"GOOD"},{"pc":"UMEC-CALC1","unidade":"UMEC","utilizador":"INEGI\\jferreira","ultComunic":"2026-02-27 08:26","so":"Microsoft Windows 10 Enterprise2009","cpu":"Intel(R) Xeon(R) CPU E5-2695 v4 @ 2.10GHz","cpuClean":"E5-2695 v4","cpuScore":21934.0,"memMB":98183.0,"gpu":"NVIDIA Quadro P5000","gpuClean":"Quadro P5000","gpuScore":10000.0,"disks":"477GB: Samsung SSD 850 PRO 512GB932GB: TOSHIBA MG03ACA100","totalScore":31934.0,"rank":25,"funcao":"WS","ubicacao":"SERV ROOM","estado":"GOOD"},{"pc":"PORT-MCARVALHO_OLD","unidade":"UMEC","utilizador":"INEGI\\mcarvalho","ultComunic":"2025-06-30 16:23","so":"Microsoft Windows 10 Enterprise2009","cpu":"OctaCoreIntel(R) Core(TM) i7-10875H CPU @ 2.30GHz","cpuClean":"i7-10875H","cpuScore":15500.0,"memMB":16219.0,"gpu":"NVIDIA GeForce RTX 2060Intel(R) UHD Graphics","gpuClean":"GeForce RTX 2060UHD Graphics","gpuScore":14000.0,"disks":"932GB: Samsung SSD 980 PRO 1TB238GB: INNOVATION¡¤IT","totalScore":29500.0,"rank":26,"funcao":"DN","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"PORT-UMEC04","unidade":"UMEC","utilizador":"INEGI\\pvmartins","ultComunic":"2025-12-16 13:52","so":"Microsoft Windows 11 Enterprise2009","cpu":"OctaCoreIntel(R) Core(TM) i7-10875H CPU @ 2.30GHz","cpuClean":"i7-10875H","cpuScore":15500.0,"memMB":32553.0,"gpu":"NVIDIA GeForce RTX 2060Intel(R) UHD Graphics","gpuClean":"GeForce RTX 2060UHD Graphics","gpuScore":14000.0,"disks":"1863GB: WDC  WDS200T2B0B-00YS70466GB: TOSHIBA-RD500","totalScore":29500.0,"rank":26,"funcao":"Service","ubicacao":"UNKNOWN","estado":"GOOD"},{"pc":"PORT-JSRODRIGUES","unidade":"UMEC","utilizador":"INEGI\\cmcarvalho","ultComunic":"2026-02-12 15:34","so":"Microsoft Windows 11 Enterprise2009","cpu":"OctaCoreIntel(R) Core(TM) i7-10875H CPU @ 2.30GHz","cpuClean":"i7-10875H","cpuScore":15500.0,"memMB":32587.0,"gpu":"NVIDIA GeForce RTX 2060Intel(R) UHD Graphics","gpuClean":"GeForce RTX 2060UHD Graphics","gpuScore":14000.0,"disks":"466GB: TOSHIBA-RD500","totalScore":29500.0,"rank":26,"funcao":"LT","ubicacao":"RG","estado":"ACCEPTABLE"},{"pc":"PORT-TRSILVA","unidade":"UMEC","utilizador":"INEGI\\trsilva","ultComunic":"2026-02-26 17:07","so":"Microsoft Windows 10 Enterprise2009","cpu":"OctaCoreIntel(R) Core(TM) i7-10875H CPU @ 2.30GHz","cpuClean":"i7-10875H","cpuScore":15500.0,"memMB":32553.0,"gpu":"NVIDIA GeForce RTX 2060Intel(R) UHD Graphics","gpuClean":"GeForce RTX 2060UHD Graphics","gpuScore":14000.0,"disks":"1863GB: WDC  WDS200T2B0B-00YS70466GB: TOSHIBA-RD500","totalScore":29500.0,"rank":26,"funcao":"LT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT-ACHICHARO","unidade":"UMEC","utilizador":"INEGI\\achicharo","ultComunic":"2026-02-27 09:44","so":"Microsoft Windows 11 Enterprise2009","cpu":"OctaCoreIntel(R) Core(TM) i7-10875H CPU @ 2.30GHz","cpuClean":"i7-10875H","cpuScore":15500.0,"memMB":16169.0,"gpu":"NVIDIA GeForce RTX 2060Intel(R) UHD Graphics","gpuClean":"GeForce RTX 2060UHD Graphics","gpuScore":14000.0,"disks":"477GB: INNOVATION¡¤IT","totalScore":29500.0,"rank":26,"funcao":"LT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT-MMOUTINHO","unidade":"UMEC","utilizador":"INEGI\\mmoutinho","ultComunic":"2026-02-27 08:20","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":31878.0,"gpu":"Intel(R) Arc(TM) Graphics","gpuClean":"Arc(TM) Graphics","gpuScore":3000.0,"disks":"477GB: NVMe PC SN740 NVMe WD 512GB","totalScore":29000.0,"rank":31,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-HTEIXEIRA","unidade":"UMEC","utilizador":"INEGI\\hteixeira","ultComunic":"2026-02-27 09:48","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":31878.0,"gpu":"Intel(R) Arc(TM) Graphics","gpuClean":"Arc(TM) Graphics","gpuScore":3000.0,"disks":"477GB: NVMe PC SN740 NVMe WD 512GB","totalScore":29000.0,"rank":31,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-CPEREIRA","unidade":"UMEC","utilizador":"INEGI\\cpereira","ultComunic":"2026-02-27 09:51","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165H","cpuClean":"Ultra 7 165H","cpuScore":26000.0,"memMB":31878.0,"gpu":"Intel(R) Arc(TM) Graphics","gpuClean":"Arc(TM) Graphics","gpuScore":3000.0,"disks":"477GB: NVMe PC SN740 NVMe WD 512GB","totalScore":29000.0,"rank":31,"funcao":"ENG","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-RPEREIRA","unidade":"UMEC","utilizador":"INEGI\\rpereira","ultComunic":"2026-02-27 09:49","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-9750HF CPU @ 2.60GHz","cpuClean":"i7-9750HF","cpuScore":11000.0,"memMB":16304.0,"gpu":"NVIDIA GeForce RTX 2060","gpuClean":"GeForce RTX 2060","gpuScore":14000.0,"disks":"477GB: HFM512GDHTNG-8310A","totalScore":25000.0,"rank":34,"funcao":"PHD","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT-NCORREIA","unidade":"UMEC","utilizador":"INEGI\\ncorreia","ultComunic":"2026-02-27 09:54","so":"Microsoft Windows 11 Enterprise2009","cpu":"Snapdragon(R) X Plus - X1P64100 - Qualcomm(R) Oryon(TM) CPU","cpuClean":"Snapdragon(R) X Plus - X1P64100 - Qualcomm(R) Oryon(TM)","cpuScore":21328.0,"memMB":15980.0,"gpu":"Qualcomm(R) Adreno(TM) X1-85 GPU","gpuClean":"Qualcomm(R) Adreno(TM) X1-85 GPU","gpuScore":3000.0,"disks":"477GB: PVC10 SK hynix 512GB","totalScore":24328.0,"rank":35,"funcao":"DU","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PRGONCALVES2","unidade":"UMEC","utilizador":"INEGI\\prgoncalves","ultComunic":"2026-02-27 08:22","so":"Microsoft Windows 10 Enterprise2009","cpu":"OctaCoreIntel(R) Xeon(R) W-2245 CPU @ 3.90GHz","cpuClean":"W-2245","cpuScore":19000.0,"memMB":130780.0,"gpu":"NVIDIA Quadro P1000","gpuClean":"Quadro P1000","gpuScore":4501.0,"disks":"954GB: KXG60ZNV1T02 TOSHIBA3726GB: TOSHIBA MG04ACA400E3726GB: ST4000DM004-2CV104","totalScore":23501.0,"rank":36,"funcao":"CT","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"NODE3","unidade":"UMEC","utilizador":"INEGI\\lafonso","ultComunic":"2026-02-27 09:55","so":"Microsoft Windows Server 2019 Standard1809","cpu":"Intel(R) Xeon(R) Silver 4310 CPU @ 2.10GHz","cpuClean":"Silver 4310","cpuScore":21903.0,"memMB":261833.0,"gpu":"Matrox G200eh3 (HPE) WDDM 2.0","gpuClean":"Matrox G200eh3 (HPE) WDDM 2.0","gpuScore":50.0,"disks":"11444GB: HPE MSA 2050 SAN  Multi-Path Disk Device1GB: HPE MSA 2050 SAN  Multi-Path Disk Device3714GB: HPE MSA 2050 SAN  Multi-Path Disk Device3725GB: HPE MSA 2050 SAN  Multi-Path Disk Device35483GB: HPE MSA 2050 SAN  Multi-Path Disk Device223GB: HPE MR416i-p Gen10+ SCSI Disk Device10245GB: HPE MSA 2060 FC  Multi-Path Disk Device17695GB: HPE MSA 2060 FC  Multi-Path Disk Device31665GB: HPE MSA 2060 FC  Multi-Path Disk Device1GB: HPE MSA 2060 FC  Multi-Path Disk Device","totalScore":21953.0,"rank":37,"funcao":"SERVER","ubicacao":"UNKNOWN","estado":"GOOD"},{"pc":"LAB-NANO03","unidade":"UMEC","utilizador":"INEGI\\hteixeira","ultComunic":"2026-01-19 08:43","so":"Microsoft Windows 11 Pro2009","cpu":"HexaCore 12th Gen Intel(R) Core(TM) i5-12400","cpuClean":"i5-12400","cpuScore":19400.0,"memMB":16147.0,"gpu":"Intel(R) UHD Graphics 730","gpuClean":"UHD Graphics 730","gpuScore":2200.0,"disks":"932GB: Samsung SSD 870 QVO 1TB","totalScore":21600.0,"rank":38,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"LAB-POLIMEROS01","unidade":"UMEC","utilizador":"INEGI\\icmendes","ultComunic":"2026-02-12 14:04","so":"Microsoft Windows 11 Pro2009","cpu":"HexaCore 12th Gen Intel(R) Core(TM) i5-12400","cpuClean":"i5-12400","cpuScore":19400.0,"memMB":16147.0,"gpu":"Intel(R) UHD Graphics 730","gpuClean":"UHD Graphics 730","gpuScore":2200.0,"disks":"932GB: Samsung SSD 870 QVO 1TB","totalScore":21600.0,"rank":38,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"LAB-POLIMEROS02","unidade":"UMEC","utilizador":"INEGI\\jprudencio","ultComunic":"2026-02-13 08:49","so":"Microsoft Windows 11 Pro2009","cpu":"HexaCore 12th Gen Intel(R) Core(TM) i5-12400","cpuClean":"i5-12400","cpuScore":19400.0,"memMB":7881.0,"gpu":"Intel(R) UHD Graphics 730","gpuClean":"UHD Graphics 730","gpuScore":2200.0,"disks":"238GB: NVMe BG6 KIOXIA 256GB","totalScore":21600.0,"rank":38,"funcao":"LAB","ubicacao":"LAB","estado":"ACCEPTABLE"},{"pc":"JMMACHADO","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 02:04","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz","cpuClean":"i7-8700K","cpuScore":13572.0,"memMB":16300.0,"gpu":"Microsoft Remote Display AdapterNVIDIA Quadro P2000NVIDIA Quadro K2200","gpuClean":"Microsoft Remote Display AdapterQuadro P2000Quadro K2200","gpuScore":6991.0,"disks":"233GB: Samsung SSD 750 EVO 250GB932GB: Hitachi HDS721010CLA332932GB: WDC WD10EZRZ-00HTKB0466GB: Samsung SSD 960 EVO 500GB932GB: WDC WD10EZEX-08WN4A0","totalScore":20563.0,"rank":41,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"NCORREIA","unidade":"UMEC","utilizador":"INEGI\\ncorreia","ultComunic":"2026-02-27 05:32","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz","cpuClean":"i7-8700K","cpuScore":13572.0,"memMB":65381.0,"gpu":"NVIDIA Quadro P2000Intel(R) UHD Graphics 630","gpuClean":"Quadro P2000UHD Graphics 630","gpuScore":6991.0,"disks":"932GB: WDC WD10EALX-009BA01863GB: Samsung SSD 870 QVO 2TB466GB: Samsung SSD 960 EVO 500GB","totalScore":20563.0,"rank":41,"funcao":"DU","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"JSRODRIGUES","unidade":"UMEC","utilizador":"INEGI\\jsrodrigues","ultComunic":"2025-04-01 09:32","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz","cpuClean":"i7-5820K","cpuScore":12900.0,"memMB":16295.0,"gpu":"NVIDIA Quadro P2000","gpuClean":"Quadro P2000","gpuScore":6991.0,"disks":"233GB: Samsung SSD 850 EVO 250GB","totalScore":19891.0,"rank":43,"funcao":"LT","ubicacao":"GAB RG","estado":"ACCEPTABLE"},{"pc":"PORT-UMEC03","unidade":"UMEC","utilizador":"INEGI\\cmcarvalho","ultComunic":"2026-02-05 15:25","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz","cpuClean":"i7-9750H","cpuScore":11300.0,"memMB":16088.0,"gpu":"Intel(R) UHD Graphics 630NVIDIA GeForce GTX 1650","gpuClean":"UHD Graphics 630GeForce GTX 1650","gpuScore":7800.0,"disks":"477GB: NVMe Micron 2200S NVM","totalScore":19100.0,"rank":44,"funcao":"Service","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"LAB-BAT2","unidade":"UMEC","utilizador":"INEGI\\fribeiro","ultComunic":"2026-02-27 09:51","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16257.0,"gpu":"Intel(R) HD Graphics 630NVIDIA Quadro P2200","gpuClean":"HD Graphics 630Quadro P2200","gpuScore":9409.0,"disks":"466GB: Samsung SSD 850 EVO 500GB","totalScore":19043.0,"rank":45,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"PORT-DGOMES","unidade":"UMEC","utilizador":"INEGI\\dgomes","ultComunic":"2026-02-27 08:19","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 165U","cpuClean":"Ultra 7 165U","cpuScore":18000.0,"memMB":32213.0,"gpu":"Intel(R) Graphics","gpuClean":"Graphics","gpuScore":1000.0,"disks":"954GB: NVMe BG6 KIOXIA 1024GB","totalScore":19000.0,"rank":46,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT_FDSILVA2","unidade":"UMEC","utilizador":"INEGI\\jpfsousa","ultComunic":"2026-01-22 20:27","so":"Microsoft Windows 10 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i7-1270P","cpuClean":"i7-1270P","cpuScore":16504.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PM9B1 NVMe Samsung 512GB","totalScore":17504.0,"rank":47,"funcao":"CT","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"PORT-RGOMES","unidade":"UMEC","utilizador":"INEGI\\rgomes","ultComunic":"2026-02-04 10:51","so":"Microsoft Windows 11 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i7-1270P","cpuClean":"i7-1270P","cpuScore":16504.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PM9B1 NVMe Samsung 512GB","totalScore":17504.0,"rank":47,"funcao":"CT","ubicacao":"GAB RG","estado":"GOOD"},{"pc":"PORT-JMCARDOSO","unidade":"UMEC","utilizador":"INEGI\\jmcardoso","ultComunic":"2026-02-26 16:15","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PM9B1 NVMe Samsung 512GB","totalScore":17504.0,"rank":47,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-JGUEDES","unidade":"UMEC","utilizador":"INEGI\\jguedes","ultComunic":"2026-02-26 18:27","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe KBG50ZNS512G NVMe KIOXIA 512GB","totalScore":17504.0,"rank":47,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-CNBORGES","unidade":"UMEC","utilizador":"INEGI\\cnborges","ultComunic":"2026-02-26 18:45","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe KBG50ZNS512G NVMe KIOXIA 512GB","totalScore":17504.0,"rank":47,"funcao":"LT","ubicacao":"RG ","estado":"NEW"},{"pc":"PORT-CMSANTOS","unidade":"UMEC","utilizador":"INEGI\\cmsantos","ultComunic":"2026-02-27 08:47","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe BC901 NVMe SK hynix 512GB","totalScore":17504.0,"rank":47,"funcao":"CT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-AARAUJO","unidade":"UMEC","utilizador":"INEGI\\aaraujo","ultComunic":"2026-02-27 09:43","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe KBG50ZNS512G NVMe KIOXIA 512GB","totalScore":17504.0,"rank":47,"funcao":"CT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT-JSILVA","unidade":"UMEC","utilizador":"INEGI\\jsilva","ultComunic":"2026-02-27 09:45","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i7-1370P","cpuClean":"i7-1370P","cpuScore":16504.0,"memMB":15748.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe BC901 NVMe SK hynix 512GB","totalScore":17504.0,"rank":47,"funcao":"CT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"JPEDRO-old","unidade":"UMEC","utilizador":"","ultComunic":"2025-11-17 09:06","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz","cpuClean":"i7-8700K","cpuScore":13572.0,"memMB":16297.0,"gpu":"Microsoft Remote Display AdapterNVIDIA Quadro P600","gpuClean":"Microsoft Remote Display AdapterQuadro P600","gpuScore":3326.0,"disks":"932GB: WDC WD10EARX-00N0YB0466GB: Samsung SSD 860 EVO 500GB","totalScore":16898.0,"rank":55,"funcao":"ENG","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"JMCARDOSO","unidade":"UMEC","utilizador":"INEGI\\referreira","ultComunic":"2026-02-26 17:05","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz","cpuClean":"i7-8700K","cpuScore":13572.0,"memMB":16225.0,"gpu":"NVIDIA Quadro P600Intel(R) UHD Graphics 630","gpuClean":"Quadro P600UHD Graphics 630","gpuScore":3326.0,"disks":"932GB: TOSHIBA HDWD110466GB: Samsung SSD 860 EVO 500GB","totalScore":16898.0,"rank":55,"funcao":"LT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"FRIBEIRO","unidade":"UMEC","utilizador":"INEGI\\fribeiro","ultComunic":"2026-02-27 09:44","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz","cpuClean":"i7-8700K","cpuScore":13572.0,"memMB":16297.0,"gpu":"NVIDIA Quadro P600","gpuClean":"Quadro P600","gpuScore":3326.0,"disks":"1863GB: WD Blue SN570 2TB466GB: Samsung SSD 860 EVO 500GB","totalScore":16898.0,"rank":55,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PMSOUSA","unidade":"UMEC","utilizador":"INEGI\\pmsousa","ultComunic":"2026-02-27 06:30","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16249.0,"gpu":"NVIDIA Quadro P2000Intel(R) HD Graphics 630","gpuClean":"Quadro P2000HD Graphics 630","gpuScore":6991.0,"disks":"466GB: Samsung SSD 850 EVO 500GB1863GB: WDC WD20EZRZ-00Z5HB0","totalScore":16625.0,"rank":58,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"HAKHAVAN","unidade":"UMEC","utilizador":"INEGI\\hakhavan","ultComunic":"2026-02-27 09:56","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16249.0,"gpu":"NVIDIA Quadro P2000Intel(R) HD Graphics 630","gpuClean":"Quadro P2000HD Graphics 630","gpuScore":6991.0,"disks":"466GB: Samsung SSD 850 EVO 500GB","totalScore":16625.0,"rank":58,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"CMCARVALHO","unidade":"UMEC","utilizador":"INEGI\\cmcarvalho","ultComunic":"2026-02-27 09:59","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":65471.0,"gpu":"NVIDIA Quadro P2000NVIDIA Quadro K2200","gpuClean":"Quadro P2000Quadro K2200","gpuScore":6991.0,"disks":"233GB: Samsung SSD 850 EVO 250GB932GB: ST1000DM010-2EP102","totalScore":16625.0,"rank":58,"funcao":"ENG","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-MCARVALHO","unidade":"UMEC","utilizador":"INEGI\\mcarvalho","ultComunic":"2026-02-25 12:23","so":"Microsoft Windows 11 Enterprise2009","cpu":"Intel(R) Core(TM) Ultra 7 155U","cpuClean":"Ultra 7 155U","cpuScore":15000.0,"memMB":15829.0,"gpu":"Intel(R) Graphics","gpuClean":"Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PVC10 SK hynix 512GB","totalScore":16000.0,"rank":61,"funcao":"DN","ubicacao":"LUGAR","estado":"NEW"},{"pc":"RPCARVALHO","unidade":"UMEC","utilizador":"INEGI\\rpcarvalho","ultComunic":"2026-02-27 09:08","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-5820K CPU @ 3.30GHz","cpuClean":"i7-5820K","cpuScore":12900.0,"memMB":32668.0,"gpu":"NVIDIA GeForce GTX 660","gpuClean":"GeForce GTX 660","gpuScore":2900.0,"disks":"932GB: WDC WD10EZEX-00WN4A0932GB: WDC WD10EALX-009BA0238GB: Samsung SSD 950 PRO 256GB","totalScore":15800.0,"rank":62,"funcao":"DN","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-JPRUDENCIO","unidade":"UMEC","utilizador":"INEGI\\jprudencio","ultComunic":"2026-02-27 09:49","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i5-1335U","cpuClean":"i5-1335U","cpuScore":14482.0,"memMB":7877.0,"gpu":"Intel(R) UHD Graphics","gpuClean":"UHD Graphics","gpuScore":1200.0,"disks":"238GB: NVMe PC SN740 NVMe WD 256GB","totalScore":15682.0,"rank":63,"funcao":"TECLAB","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_SSOUSA","unidade":"UMEC","utilizador":"INEGI\\ssousa","ultComunic":"2026-02-27 09:58","so":"Microsoft Windows 11 Enterprise2009","cpu":"13th Gen Intel(R) Core(TM) i5-1335U","cpuClean":"i5-1335U","cpuScore":14482.0,"memMB":16069.0,"gpu":"Intel(R) UHD Graphics","gpuClean":"UHD Graphics","gpuScore":1200.0,"disks":"477GB: NVMe KBG50ZNS512G NVMe KIOXIA 512GB","totalScore":15682.0,"rank":63,"funcao":"LT","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"MVIEIRA","unidade":"UMEC","utilizador":"INEGI\\mveira","ultComunic":"2026-02-27 09:47","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore Intel(R) Core(TM) i7-3930K CPU @ 3.20GHz","cpuClean":"i7-3930K","cpuScore":8199.0,"memMB":16325.0,"gpu":"NVIDIA Quadro P2000","gpuClean":"Quadro P2000","gpuScore":6991.0,"disks":"233GB: Samsung SSD 850 EVO 250GB932GB: ST1000DM003-9YN162","totalScore":15190.0,"rank":65,"funcao":"SEC","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_RPCARVALHO","unidade":"UMEC","utilizador":"INEGI\\rpcarvalho","ultComunic":"2026-02-26 11:06","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore AMD Ryzen 5 5500U with Radeon Graphics","cpuClean":"5 5500U with Radeon Graphics","cpuScore":13100.0,"memMB":15723.0,"gpu":"AMD Radeon(TM) Graphics","gpuClean":"Radeon(TM) Graphics","gpuScore":2000.0,"disks":"477GB: 311CD0512GB","totalScore":15100.0,"rank":66,"funcao":"DN","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-CRFERREIRA","unidade":"UMEC","utilizador":"INEGI\\crferreira","ultComunic":"2026-02-26 17:45","so":"Microsoft Windows 11 Enterprise2009","cpu":"HexaCore AMD Ryzen 5 5500U with Radeon Graphics","cpuClean":"5 5500U with Radeon Graphics","cpuScore":13100.0,"memMB":15723.0,"gpu":"AMD Radeon(TM) Graphics","gpuClean":"Radeon(TM) Graphics","gpuScore":2000.0,"disks":"477GB: 311CD0512GB","totalScore":15100.0,"rank":66,"funcao":"GP","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_PNFERNANDES","unidade":"UMEC","utilizador":"INEGI\\pnfernandes","ultComunic":"2026-02-27 08:49","so":"Microsoft Windows 10 Enterprise2009","cpu":"HexaCore AMD Ryzen 5 5500U with Radeon Graphics","cpuClean":"5 5500U with Radeon Graphics","cpuScore":13100.0,"memMB":15723.0,"gpu":"AMD Radeon(TM) Graphics","gpuClean":"Radeon(TM) Graphics","gpuScore":2000.0,"disks":"477GB: 311CD0512GB","totalScore":15100.0,"rank":66,"funcao":"CT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"INEGISVN","unidade":"UMEC","utilizador":"","ultComunic":"2026-01-12 12:40","so":"Microsoft Windows 10 Enterprise2004","cpu":"DualCore Intel(R) Xeon(R) Silver 4116 CPU @ 2.10GHz","cpuClean":"Silver 4116","cpuScore":14908.0,"memMB":8192.0,"gpu":"Microsoft Hyper-V VideoMicrosoft Remote Display Adapter","gpuClean":"Microsoft Hyper-V VideoMicrosoft Remote Display Adapter","gpuScore":100.0,"disks":"2040GB: Microsoft Virtual Disk600GB: Virtual HD ATA Device700GB: Microsoft Virtual Disk","totalScore":15008.0,"rank":69,"funcao":"SERVER","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"PORT_UMEC7","unidade":"UMEC","utilizador":"INEGI\\ssribeiro","ultComunic":"2026-02-26 16:09","so":"Microsoft Windows 11 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i5-1235U","cpuClean":"i5-1235U","cpuScore":12655.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PM991a NVMe Samsung 512GB","totalScore":13655.0,"rank":70,"funcao":"Service","ubicacao":"UNKNOWN","estado":"GOOD"},{"pc":"PORT_RMARQUES","unidade":"UMEC","utilizador":"INEGI\\rmarques","ultComunic":"2026-02-26 18:06","so":"Microsoft Windows 10 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i5-1235U","cpuClean":"i5-1235U","cpuScore":12655.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe PM991a NVMe Samsung 512GB","totalScore":13655.0,"rank":70,"funcao":"DN","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-GLEITE","unidade":"UMEC","utilizador":"INEGI\\gleite","ultComunic":"2026-02-27 09:47","so":"Microsoft Windows 11 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i5-1235U","cpuClean":"i5-1235U","cpuScore":12655.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe BC711 NVMe SK hynix 512GB","totalScore":13655.0,"rank":70,"funcao":"GP","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT_RFILIPE","unidade":"UMEC","utilizador":"INEGI\\rfilipe","ultComunic":"2026-02-27 09:52","so":"Microsoft Windows 11 Enterprise2009","cpu":"12th Gen Intel(R) Core(TM) i5-1235U","cpuClean":"i5-1235U","cpuScore":12655.0,"memMB":15812.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"477GB: NVMe BC711 NVMe SK hynix 512GB","totalScore":13655.0,"rank":70,"funcao":"DN","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-GLEITE_OLD","unidade":"UMEC","utilizador":"INEGI\\rcarvalho","ultComunic":"2026-02-23 12:46","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz","cpuClean":"i7-7700HQ","cpuScore":6900.0,"memMB":16273.0,"gpu":"NVIDIA GeForce GTX 1050 TiIntel(R) HD Graphics 630","gpuClean":"GeForce GTX 1050 TiHD Graphics 630","gpuScore":6400.0,"disks":"256GB: Crucial_CT275MX300SSD4466GB: ST500LX025-1U717D","totalScore":13300.0,"rank":74,"funcao":"GP","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"MJPINTO","unidade":"UMEC","utilizador":"INEGI\\mjpinto","ultComunic":"2026-02-27 09:48","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":65471.0,"gpu":"NVIDIA Quadro K2200","gpuClean":"Quadro K2200","gpuScore":3579.0,"disks":"932GB: ST1000DM010-2EP102233GB: Samsung SSD 850 EVO 250GB","totalScore":13213.0,"rank":75,"funcao":"ENG","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"APOLIAKOV","unidade":"UMEC","utilizador":"INEGI\\apoliakov","ultComunic":"2026-02-27 09:50","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16311.0,"gpu":"NVIDIA Quadro K2200","gpuClean":"Quadro K2200","gpuScore":3579.0,"disks":"932GB: WDC WD10EZEX-08WN4A0233GB: Samsung SSD 850 EVO 250GB","totalScore":13213.0,"rank":75,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"JMCARDOSO-old","unidade":"UMEC","utilizador":"INEGI\\jmcardoso","ultComunic":"2026-02-27 09:03","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz","cpuClean":"i7-6700K","cpuScore":8938.0,"memMB":16304.0,"gpu":"NVIDIA Quadro K2200","gpuClean":"Quadro K2200","gpuScore":3579.0,"disks":"233GB: Samsung SSD 750 EVO 250GB932GB: WDC WD10EZRZ-00HTKB0","totalScore":12517.0,"rank":77,"funcao":"LT","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"JPFSOUSA","unidade":"UMEC","utilizador":"INEGI\\jpfsousa","ultComunic":"2026-02-27 09:59","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz","cpuClean":"i7-6700K","cpuScore":8938.0,"memMB":16264.0,"gpu":"Intel(R) HD Graphics 530NVIDIA Quadro K2200","gpuClean":"HD Graphics 530Quadro K2200","gpuScore":3579.0,"disks":"233GB: Samsung SSD 750 EVO 250GB932GB: WDC WD10EZRZ-00HTKB0","totalScore":12517.0,"rank":77,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_FDSILVA","unidade":"UMEC","utilizador":"INEGI\\jpfsousa","ultComunic":"2026-01-07 17:18","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz","cpuClean":"i7-7700HQ","cpuScore":6900.0,"memMB":16304.0,"gpu":"NVIDIA GeForce GTX 1050Intel(R) HD Graphics 630","gpuClean":"GeForce GTX 1050HD Graphics 630","gpuScore":5300.0,"disks":"932GB: HGST HTS721010A9E630238GB: KINGSTON RBU-SNS8152S3256GG5","totalScore":12200.0,"rank":79,"funcao":"CT","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"JPALVES-old","unidade":"UMEC","utilizador":"INEGI\\tmoreira","ultComunic":"2025-11-07 15:58","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16257.0,"gpu":"Intel(R) HD Graphics 630NVIDIA Quadro K620","gpuClean":"HD Graphics 630Quadro K620","gpuScore":2208.0,"disks":"932GB: WDC WD10EZEX-60WN4A1466GB: Samsung SSD 850 EVO 500GB","totalScore":11842.0,"rank":80,"funcao":"ENG","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"RCARVALHO","unidade":"UMEC","utilizador":"INEGI\\rcarvalho","ultComunic":"2026-02-27 05:18","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16321.0,"gpu":"NVIDIA Quadro K620","gpuClean":"Quadro K620","gpuScore":2208.0,"disks":"466GB: Samsung SSD 850 EVO 500GB","totalScore":11842.0,"rank":80,"funcao":"ENG","ubicacao":"LUGAR","estado":"TBR"},{"pc":"LAB-BAT04","unidade":"UMEC","utilizador":"INEGI\\ppedrosa","ultComunic":"2026-02-09 14:37","so":"Microsoft Windows 11 Pro2009","cpu":"HexaCore 12th Gen Intel(R) Core(TM) i3-1215U","cpuClean":"i3-1215U","cpuScore":10231.0,"memMB":7877.0,"gpu":"Intel(R) UHD Graphics","gpuClean":"UHD Graphics","gpuScore":1200.0,"disks":"238GB: NVMe KBG50ZNS256G NVMe KIOXIA 256GB","totalScore":11431.0,"rank":82,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"PORT-RBFIGUEIREDO","unidade":"UMEC","utilizador":"INEGI\\mcarvalho","ultComunic":"2026-01-14 16:41","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz","cpuClean":"i7-1165G7","cpuScore":10300.0,"memMB":16080.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe INTEL SSDPEKNW010T8","totalScore":11300.0,"rank":83,"funcao":"GP","ubicacao":"Gestão Jessica","estado":"ACCEPTABLE"},{"pc":"PORT-BMAIA","unidade":"UMEC","utilizador":"INEGI\\bmaia","ultComunic":"2026-02-24 18:37","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz","cpuClean":"i7-1165G7","cpuScore":10300.0,"memMB":16080.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe HFM001TD3JX013N","totalScore":11300.0,"rank":83,"funcao":"PHD","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_TVPINTO","unidade":"UMEC","utilizador":"INEGI\\tvpinto","ultComunic":"2026-02-26 13:51","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz","cpuClean":"i7-1165G7","cpuScore":10300.0,"memMB":16080.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe INTEL SSDPEKNW010T8","totalScore":11300.0,"rank":83,"funcao":"GP","ubicacao":"LUGAR","estado":"GOOD"},{"pc":"PORT-ICMENDES","unidade":"UMEC","utilizador":"INEGI\\icmendes","ultComunic":"2026-02-27 08:15","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz","cpuClean":"i7-1165G7","cpuScore":10300.0,"memMB":16080.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe INTEL SSDPEKNW010T8","totalScore":11300.0,"rank":83,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PORT_CNOVO","unidade":"UMEC","utilizador":"INEGI\\cnovo","ultComunic":"2026-02-27 09:59","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz","cpuClean":"i7-1165G7","cpuScore":10300.0,"memMB":16080.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe HFM001TD3JX013N","totalScore":11300.0,"rank":83,"funcao":"DN","ubicacao":"LUGAR","estado":"NEW"},{"pc":"PORT-MVIEIRA","unidade":"UMEC","utilizador":"INEGI\\mveira","ultComunic":"2025-12-10 16:20","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore AMD Ryzen 5 7520U with Radeon Graphics","cpuClean":"5 7520U with Radeon Graphics","cpuScore":9000.0,"memMB":15648.0,"gpu":"AMD Radeon(TM) Graphics","gpuClean":"Radeon(TM) Graphics","gpuScore":2000.0,"disks":"477GB: HFS512GEJ9X108N","totalScore":11000.0,"rank":88,"funcao":"SEC","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"PORT-PRGONCALVES","unidade":"UMEC","utilizador":"INEGI\\prgoncalves","ultComunic":"2026-02-27 08:53","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz","cpuClean":"i5-1135G7","cpuScore":9900.0,"memMB":7888.0,"gpu":"Intel(R) Iris(R) Xe Graphics","gpuClean":"Iris(R) Xe Graphics","gpuScore":1000.0,"disks":"954GB: NVMe INTEL SSDPEKNW010T8","totalScore":10900.0,"rank":89,"funcao":"CT","ubicacao":"LUGAR","estado":"TBR"},{"pc":"HPINHEIRO","unidade":"UMEC","utilizador":"INEGI\\hpinheiro","ultComunic":"2026-02-02 05:53","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16252.0,"gpu":"Intel(R) HD Graphics 630","gpuClean":"HD Graphics 630","gpuScore":1100.0,"disks":"466GB: Samsung SSD 850 EVO 500GB","totalScore":10734.0,"rank":90,"funcao":"TECLAB","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"MCARVALHO","unidade":"UMEC","utilizador":"INEGI\\mcarvalho","ultComunic":"2026-02-27 04:26","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16245.0,"gpu":"Intel(R) HD Graphics 630NVIDIA Quadro M2000","gpuClean":"HD Graphics 630Quadro M2000","gpuScore":1100.0,"disks":"233GB: Samsung SSD 850 EVO 250GB932GB: ST1000DM010-2EP102","totalScore":10734.0,"rank":90,"funcao":"DN","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PJCUNHA_OLD","unidade":"UMEC","utilizador":"INEGI\\tasantos","ultComunic":"2026-02-27 09:56","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-7700K CPU @ 4.20GHz","cpuClean":"i7-7700K","cpuScore":9634.0,"memMB":16239.0,"gpu":"NVIDIA Quadro FX 580Intel(R) HD Graphics 630","gpuClean":"Quadro FX 580HD Graphics 630","gpuScore":1100.0,"disks":"932GB: WDC WD10EZEX-08WN4A0233GB: Samsung SSD 850 EVO 250GB","totalScore":10734.0,"rank":90,"funcao":"ENG","ubicacao":"TERESA SANTOS","estado":"ACCEPTABLE"},{"pc":"PORT-UMEC02","unidade":"UMEC","utilizador":"INEGI\\jferreira","ultComunic":"2025-11-06 17:18","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz","cpuClean":"i7-6700HQ","cpuScore":6500.0,"memMB":16280.0,"gpu":"NVIDIA GeForce GTX 950MIntel(R) HD Graphics 530","gpuClean":"GeForce GTX 950MHD Graphics 530","gpuScore":2400.0,"disks":"932GB: ST1000LM024 HN-M101MBB119GB: SAMSUNG MZNLF128HCHP-00004","totalScore":8900.0,"rank":93,"funcao":"Service","ubicacao":"UNKNOWN","estado":"ACCEPTABLE"},{"pc":"PORT-MBPINTO","unidade":"UMEC","utilizador":"INEGI\\mbpinto","ultComunic":"2026-02-24 16:35","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz","cpuClean":"i7-6700HQ","cpuScore":6500.0,"memMB":16280.0,"gpu":"NVIDIA GeForce GTX 950MIntel(R) HD Graphics 530","gpuClean":"GeForce GTX 950MHD Graphics 530","gpuScore":2400.0,"disks":"932GB: ST1000LM024 HN-M101MBB119GB: SAMSUNG MZNLF128HCHP-00004","totalScore":8900.0,"rank":93,"funcao":"GP","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"PRGONCALVES","unidade":"UMEC","utilizador":"INEGI\\prgoncalves","ultComunic":"2026-02-08 02:12","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-4770K CPU @ 3.50GHz","cpuClean":"i7-4770K","cpuScore":7100.0,"memMB":16256.0,"gpu":"Intel(R) HD Graphics 4600","gpuClean":"HD Graphics 4600","gpuScore":1000.0,"disks":"112GB: Samsung SSD 840 EVO 120GB932GB: WDC WD10EZEX-00KUWA0","totalScore":8100.0,"rank":95,"funcao":"ENG","ubicacao":"LUGAR","estado":"TBR"},{"pc":"PORT_HAKHAVAN","unidade":"UMEC","utilizador":"INEGI\\hakhavan","ultComunic":"2026-02-24 11:50","so":"Microsoft Windows 11 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz","cpuClean":"i7-10510U","cpuScore":6800.0,"memMB":32553.0,"gpu":"Intel(R) UHD Graphics","gpuClean":"UHD Graphics","gpuScore":1200.0,"disks":"1863GB: ST2000LM015-2E8174932GB: HP SSD EX900 1TB","totalScore":8000.0,"rank":96,"funcao":"LT","ubicacao":"LUGAR","estado":"NEW"},{"pc":"RCOLIVEIRA","unidade":"UMEC","utilizador":"INEGI\\rcoliveira","ultComunic":"2025-02-19 09:34","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-4770K CPU @ 3.50GHz","cpuClean":"i7-4770K","cpuScore":7100.0,"memMB":16322.0,"gpu":"NVIDIA Quadro K600","gpuClean":"Quadro K600","gpuScore":800.0,"disks":"932GB: WDC WD10EZEX-00BN5A0224GB: KINGSTON SKC300S37A240G","totalScore":7900.0,"rank":97,"funcao":"ENG","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"LAB-NANO","unidade":"UMEC","utilizador":"INEGI\\rcoliveira","ultComunic":"2025-11-05 03:14","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-3820 CPU @ 3.60GHz","cpuClean":"i7-3820","cpuScore":5787.0,"memMB":16361.0,"gpu":"ATI Radeon HD 4300/4500 Series","gpuClean":"ATI Radeon HD 4300/4500 Series","gpuScore":2000.0,"disks":"932GB: WDC WD10EZRX-00A8LB0466GB: Samsung SSD 870 EVO 500GB","totalScore":7787.0,"rank":98,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"PORT_FNETO","unidade":"UMEC","utilizador":"INEGI\\fneto","ultComunic":"2026-02-27 09:49","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-4710HQ CPU @ 2.50GHz","cpuClean":"i7-4710HQ","cpuScore":5400.0,"memMB":16267.0,"gpu":"NVIDIA GeForce GTX 870MIntel(R) HD Graphics 4600","gpuClean":"GeForce GTX 870MHD Graphics 4600","gpuScore":2200.0,"disks":"477GB: KINGSTON SKC600512G","totalScore":7600.0,"rank":99,"funcao":"LT","ubicacao":"LUGAR","estado":"ACCEPTABLE"},{"pc":"LAB-BAT1","unidade":"UMEC","utilizador":"","ultComunic":"2026-02-27 08:43","so":"Microsoft Windows 10 Enterprise2009","cpu":"QuadCore Intel(R) Core(TM) i7-3820 CPU @ 3.60GHz","cpuClean":"i7-3820","cpuScore":5787.0,"memMB":16325.0,"gpu":"NVIDIA Quadro 2000","gpuClean":"Quadro 2000","gpuScore":900.0,"disks":"447GB: KINGSTON SA400S37480G","totalScore":6687.0,"rank":100,"funcao":"LAB","ubicacao":"LAB","estado":"GOOD"},{"pc":"PORT-UMEC01","unidade":"UMEC","utilizador":"INEGI\\bchristoff","ultComunic":"2026-02-06 16:39","so":"Microsoft Windows 11 Enterprise2009","cpu":"DualCore Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz","cpuClean":"i5-7200U","cpuScore":3400.0,"memMB":8035.0,"gpu":"AMD Radeon (TM) R5 M330Intel(R) HD Graphics 620","gpuClean":"Radeon (TM) R5 M330HD Graphics 620","gpuScore":2000.0,"disks":"932GB: Samsung SSD 860 EVO 1TB","totalScore":5400.0,"rank":101,"funcao":"Service","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"PORT-BMAIA-OLD","unidade":"UMEC","utilizador":"INEGI\\cmcarvalho","ultComunic":"2026-02-25 00:20","so":"Microsoft Windows 10 Enterprise2009","cpu":"DualCore Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz","cpuClean":"i5-7200U","cpuScore":3400.0,"memMB":8035.0,"gpu":"AMD Radeon (TM) R5 M330Intel(R) HD Graphics 620","gpuClean":"Radeon (TM) R5 M330HD Graphics 620","gpuScore":2000.0,"disks":"238GB: SAMSUNG MZYTY256HDHP-000L2","totalScore":5400.0,"rank":101,"funcao":"PHD","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"PORT-UMEC3","unidade":"UMEC","utilizador":"INEGI\\jpfsousa","ultComunic":"2025-12-17 18:41","so":"Microsoft Windows 11 Enterprise2009","cpu":"DualCore Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz","cpuClean":"i7-7500U","cpuScore":3600.0,"memMB":8075.0,"gpu":"Intel(R) HD Graphics 620NVIDIA GeForce 940MX","gpuClean":"HD Graphics 620GeForce 940MX","gpuScore":1200.0,"disks":"477GB: SanDisk SD8SB8U512G1002","totalScore":4800.0,"rank":103,"funcao":"Service","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"LAB_POLIMEROS3","unidade":"UMEC","utilizador":"INEGI\\cpereira","ultComunic":"2025-10-30 10:25","so":"Microsoft Windows 7 Enterprise","cpu":"DualCore Intel(R) Core(TM) i3-3220 CPU @ 3.30GHz","cpuClean":"i3-3220","cpuScore":2276.0,"memMB":3280.0,"gpu":"Intel(R) HD Graphics","gpuClean":"HD Graphics","gpuScore":1000.0,"disks":"466GB: WDC WD5000AZRX-00A8LB0 ATA Device","totalScore":3276.0,"rank":104,"funcao":"LAB","ubicacao":"LAB","estado":"TBR"},{"pc":"PORT_UMEC2","unidade":"UMEC","utilizador":"INEGI\\csa","ultComunic":"2025-04-11 01:19","so":"Microsoft Windows 10 Enterprise2009","cpu":"DualCore Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz","cpuClean":"i5-4200U","cpuScore":2200.0,"memMB":4001.0,"gpu":"Intel(R) HD Graphics Family","gpuClean":"HD Graphics Family","gpuScore":1000.0,"disks":"119GB: TOSHIBA THNSNH128G8NT","totalScore":3200.0,"rank":105,"funcao":"Service","ubicacao":"UNKNOWN","estado":"TBR"},{"pc":"LAB-BAT03","unidade":"UMEC","utilizador":"INEGI\\cpereira","ultComunic":"2026-02-02 05:20","so":"Microsoft Windows 10 Pro2009","cpu":"QuadCore Intel(R) Celeron(R) CPU  N3150  @ 1.60GHz","cpuClean":"N3150","cpuScore":1100.0,"memMB":8037.0,"gpu":"Intel(R) HD Graphics","gpuClean":"HD Graphics","gpuScore":1000.0,"disks":"233GB: Samsung SSD 850 EVO 250GB","totalScore":2100.0,"rank":106,"funcao":"LAB","ubicacao":"LAB","estado":"TBR"}];
 
@@ -481,6 +495,7 @@ const META_KEY = 'inegi:umec:meta:v2';
 const THEME_KEY = 'inegi:umec:theme:v1';
 const THRESHOLDS_KEY = 'inegi:umec:thresholds:v1';
 const PERIPHERALS_KEY = 'inegi:umec:peripherals:v1';
+const WAREHOUSE_KEY  = 'inegi:umec:warehouse:v1';
 const FUNCTIONS_KEY = 'inegi:umec:custom_functions:v1';
 const SCHEMA_VERSION_KEY = 'inegi:umec:pcs_schema_version';
 
@@ -508,6 +523,30 @@ const SINGLE_PERIPHERALS = [
 ];
 
 // Build a fresh peripheral record with empty fields
+const WAREHOUSE_TIPOS = [
+  { key: 'monitor',      label: 'Monitor' },
+  { key: 'rato',         label: 'Rato' },
+  { key: 'teclado',      label: 'Teclado' },
+  { key: 'headphones',   label: 'Headphones' },
+  { key: 'basePortatil', label: 'Base Portátil' },
+  { key: 'hub',          label: 'Hub USB' },
+  { key: 'camera',       label: 'Webcam' },
+  { key: 'outro',        label: 'Outro' },
+];
+
+const newWarehouseItem = () => ({
+  id: 'w_' + Date.now(),
+  tipo: 'monitor',
+  marca: '',
+  modelo: '',
+  tamanho: '',
+  estado: 'GOOD',
+  notas: '',
+  dataEntrada: new Date().toISOString().slice(0, 10),
+  atribuidoA: null,
+  atribuidoEm: null,
+});
+
 const newPeripheralRecord = () => {
   const rec = {
     id: 'p_' + Date.now(),
@@ -694,6 +733,29 @@ const usePeripheralsStorage = () => {
     setItems(next);
     try { await window.storage.set(PERIPHERALS_KEY, JSON.stringify(next)); }
     catch (e) { console.error('Peripherals save failed', e); }
+  };
+
+  return { items, setItems: persist, loaded };
+};
+
+const useWarehouseStorage = () => {
+  const [items, setItems] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const stored = await window.storage.get(WAREHOUSE_KEY);
+        if (stored?.value) setItems(JSON.parse(stored.value));
+      } catch {}
+      setLoaded(true);
+    })();
+  }, []);
+
+  const persist = async (next) => {
+    setItems(next);
+    try { await window.storage.set(WAREHOUSE_KEY, JSON.stringify(next)); }
+    catch (e) { console.error('Warehouse save failed', e); }
   };
 
   return { items, setItems: persist, loaded };
@@ -3641,6 +3703,267 @@ const thTh = {
   fontFamily: 'JetBrains Mono, monospace', fontWeight: 600,
 };
 
+// ===== Warehouse =====
+const WarehouseItemForm = ({ item, onSave, onClose }) => {
+  const t = useTheme();
+  const btn = useButtonStyles();
+  const [form, setForm] = useState(item);
+  const update = (k, v) => setForm(f => ({ ...f, [k]: v }));
+  const isNew = !item._persisted;
+  const valid = (form.marca || '').trim().length > 0;
+
+  const inp = {
+    width: '100%', padding: '9px 12px', background: t.bgPanel,
+    border: `1px solid ${t.border}`, borderRadius: 6, color: t.text,
+    fontSize: 13, outline: 'none', boxSizing: 'border-box',
+  };
+  const lbl = {
+    display: 'block', fontSize: 10, color: t.textDim, marginBottom: 5,
+    textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'JetBrains Mono, monospace',
+  };
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)', zIndex: 1001, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 10, padding: 28, width: '100%', maxWidth: 500, boxShadow: '0 24px 64px rgba(0,0,0,.6)', maxHeight: '90vh', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
+          <div style={{ fontWeight: 700, fontSize: 16 }}>{isNew ? 'Novo Item de Armazém' : 'Editar Item'}</div>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: t.textDim }}><X size={18} /></button>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <label style={lbl}>Tipo *</label>
+            <select value={form.tipo} onChange={e => update('tipo', e.target.value)} style={inp}>
+              {WAREHOUSE_TIPOS.map(tp => <option key={tp.key} value={tp.key}>{tp.label}</option>)}
+            </select>
+          </div>
+          <div>
+            <label style={lbl}>Marca *</label>
+            <input value={form.marca} onChange={e => update('marca', e.target.value)} style={inp} placeholder="Dell, Logitech…" />
+          </div>
+          <div>
+            <label style={lbl}>Modelo</label>
+            <input value={form.modelo} onChange={e => update('modelo', e.target.value)} style={inp} placeholder="Modelo" />
+          </div>
+          {form.tipo === 'monitor' && (
+            <div>
+              <label style={lbl}>Tamanho</label>
+              <input value={form.tamanho} onChange={e => update('tamanho', e.target.value)} style={inp} placeholder='ex: 27"' />
+            </div>
+          )}
+          <div>
+            <label style={lbl}>Estado</label>
+            <select value={form.estado} onChange={e => update('estado', e.target.value)} style={inp}>
+              {PERIPHERAL_STATUS.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label style={lbl}>Data de Entrada</label>
+            <input type="date" value={form.dataEntrada} onChange={e => update('dataEntrada', e.target.value)} style={inp} />
+          </div>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <label style={lbl}>Notas</label>
+            <textarea value={form.notas} onChange={e => update('notas', e.target.value)} rows={3}
+              style={{ ...inp, resize: 'vertical' }} />
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 22 }}>
+          <button onClick={onClose} style={{ ...btn.ghost }}>Cancelar</button>
+          <button onClick={() => valid && onSave(form)} disabled={!valid}
+            style={{ ...btn.primary, opacity: valid ? 1 : 0.5, cursor: valid ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Save size={14} /> Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Warehouse = ({ items, pcs, onAdd, onEdit, onDelete, onAssign, onReturn }) => {
+  const t = useTheme();
+  const btn = useButtonStyles();
+  const [tipoFilter, setTipoFilter] = useState('all');
+  const [estadoFilter, setEstadoFilter] = useState('all');
+  const [stockFilter, setStockFilter] = useState('stock');
+  const [search, setSearch] = useState('');
+  const [assignItem, setAssignItem] = useState(null);
+  const [assignPc, setAssignPc] = useState('');
+
+  const filtered = useMemo(() => items.filter(item => {
+    if (tipoFilter !== 'all' && item.tipo !== tipoFilter) return false;
+    if (estadoFilter !== 'all' && item.estado !== estadoFilter) return false;
+    if (stockFilter === 'stock' && item.atribuidoA) return false;
+    if (stockFilter === 'assigned' && !item.atribuidoA) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      return (item.marca || '').toLowerCase().includes(q) ||
+        (item.modelo || '').toLowerCase().includes(q) ||
+        (item.notas || '').toLowerCase().includes(q) ||
+        (item.atribuidoA || '').toLowerCase().includes(q);
+    }
+    return true;
+  }), [items, tipoFilter, estadoFilter, stockFilter, search]);
+
+  const stockCount = items.filter(i => !i.atribuidoA).length;
+  const assignedCount = items.filter(i => !!i.atribuidoA).length;
+  const tipoLabel = k => (WAREHOUSE_TIPOS.find(x => x.key === k) || { label: k }).label;
+  const statusColors = PERIPHERAL_STATUS_COLORS(t);
+
+  const handleConfirmAssign = () => {
+    if (!assignPc) return;
+    onAssign(assignItem, assignPc);
+    setAssignItem(null);
+    setAssignPc('');
+  };
+
+  const inp = {
+    padding: '7px 10px', background: t.bgPanel, border: `1px solid ${t.border}`,
+    borderRadius: 6, color: t.text, fontSize: 13, outline: 'none', boxSizing: 'border-box',
+  };
+  const thS = {
+    padding: '10px 14px', textAlign: 'left', fontSize: 10, color: t.textDim,
+    textTransform: 'uppercase', letterSpacing: '0.1em',
+    fontFamily: 'JetBrains Mono, monospace', fontWeight: 600,
+    borderBottom: `1px solid ${t.border}`, whiteSpace: 'nowrap',
+  };
+  const tdS = { padding: '10px 14px', borderBottom: `1px solid ${t.bgHover}`, fontSize: 13, verticalAlign: 'middle' };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 14 }}>
+        <Stat label="Total Armazém" value={items.length} sub="itens registados" accent={t.accent} icon={Package} />
+        <Stat label="Em Stock" value={stockCount} sub="disponíveis" accent={t.success} icon={PackageCheck} />
+        <Stat label="Atribuídos" value={assignedCount} sub="em uso" accent={t.textDim} icon={UserCheck} />
+      </div>
+
+      <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 8, padding: 14, display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Pesquisar marca, modelo, PC…"
+          style={{ ...inp, width: 220, flex: '0 0 auto' }} />
+        <select value={tipoFilter} onChange={e => setTipoFilter(e.target.value)} style={{ ...inp, width: 150 }}>
+          <option value="all">Todos os tipos</option>
+          {WAREHOUSE_TIPOS.map(tp => <option key={tp.key} value={tp.key}>{tp.label}</option>)}
+        </select>
+        <select value={estadoFilter} onChange={e => setEstadoFilter(e.target.value)} style={{ ...inp, width: 140 }}>
+          <option value="all">Todos os estados</option>
+          {PERIPHERAL_STATUS.map(s => <option key={s} value={s}>{s}</option>)}
+        </select>
+        <select value={stockFilter} onChange={e => setStockFilter(e.target.value)} style={{ ...inp, width: 160 }}>
+          <option value="all">Stock + Atribuídos</option>
+          <option value="stock">Apenas em stock</option>
+          <option value="assigned">Apenas atribuídos</option>
+        </select>
+        <div style={{ flex: 1 }} />
+        <button onClick={onAdd} style={{ ...btn.primary, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Plus size={14} /> Novo Item
+        </button>
+      </div>
+
+      <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 8, overflow: 'hidden' }}>
+        {filtered.length === 0 ? (
+          <div style={{ padding: 48, textAlign: 'center', color: t.textDim, fontSize: 13 }}>
+            {items.length === 0
+              ? 'Nenhum item no armazém. Clique em "Novo Item" para adicionar.'
+              : 'Nenhum resultado para os filtros actuais.'}
+          </div>
+        ) : (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+              <thead>
+                <tr style={{ background: t.bgPanelAlt }}>
+                  <th style={thS}>Tipo</th>
+                  <th style={thS}>Marca / Modelo</th>
+                  <th style={thS}>Estado</th>
+                  <th style={thS}>Entrada</th>
+                  <th style={thS}>Atribuído a</th>
+                  <th style={thS}>Notas</th>
+                  <th style={{ ...thS, textAlign: 'right' }}></th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map(item => {
+                  const sc = statusColors[item.estado] || {};
+                  return (
+                    <tr key={item.id}
+                      onMouseEnter={e => e.currentTarget.style.background = t.bgPanelAlt}
+                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                      <td style={tdS}>
+                        <span style={{ background: t.bgPanelAlt, border: `1px solid ${t.border}`, borderRadius: 4, padding: '2px 8px', fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: t.textMuted }}>
+                          {tipoLabel(item.tipo)}{item.tamanho ? ` ${item.tamanho}"` : ''}
+                        </span>
+                      </td>
+                      <td style={{ ...tdS, fontWeight: 500 }}>
+                        {item.marca || '—'}
+                        {item.modelo ? <span style={{ color: t.textDim, fontWeight: 400, marginLeft: 6 }}>{item.modelo}</span> : null}
+                      </td>
+                      <td style={tdS}>
+                        <span style={{ color: sc.color || t.text, background: (sc.dot || t.accent) + '22', borderRadius: 4, padding: '2px 8px', fontSize: 11 }}>
+                          {item.estado}
+                        </span>
+                      </td>
+                      <td style={{ ...tdS, color: t.textDim, fontFamily: 'JetBrains Mono, monospace', fontSize: 11 }}>
+                        {item.dataEntrada || '—'}
+                      </td>
+                      <td style={tdS}>
+                        {item.atribuidoA
+                          ? <><span style={{ color: t.accent, fontFamily: 'JetBrains Mono, monospace', fontSize: 11 }}>{item.atribuidoA}</span>
+                              {item.atribuidoEm && <span style={{ color: t.textFaint, fontSize: 10, marginLeft: 6 }}>{item.atribuidoEm}</span>}</>
+                          : <span style={{ color: t.success, fontSize: 11 }}>&#9679; Em stock</span>
+                        }
+                      </td>
+                      <td style={{ ...tdS, color: t.textDim, maxWidth: 200 }}>
+                        <span style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 180 }}>
+                          {item.notas || ''}
+                        </span>
+                      </td>
+                      <td style={{ ...tdS, textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        {item.atribuidoA
+                          ? <button onClick={() => onReturn(item)} style={{ ...btn.ghost, fontSize: 11, padding: '5px 10px', marginRight: 6 }}>Devolver</button>
+                          : <button onClick={() => { setAssignItem(item); setAssignPc(pcs[0]?.pc || ''); }}
+                              style={{ ...btn.primary, fontSize: 11, padding: '5px 10px', marginRight: 6 }}>Atribuir</button>
+                        }
+                        <button onClick={() => onEdit(item)} style={{ ...btn.ghost, padding: '5px 8px', marginRight: 4 }}><Edit3 size={12} /></button>
+                        <button onClick={() => onDelete(item)} style={{ ...btn.danger, padding: '5px 8px' }}><Trash2 size={12} /></button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {assignItem && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)', zIndex: 1001, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}
+          onClick={e => e.target === e.currentTarget && setAssignItem(null)}>
+          <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 10, padding: 28, width: '100%', maxWidth: 420, boxShadow: '0 24px 64px rgba(0,0,0,.6)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+              <div style={{ fontWeight: 700, fontSize: 16 }}>Atribuir a PC</div>
+              <button onClick={() => setAssignItem(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: t.textDim }}><X size={18} /></button>
+            </div>
+            <div style={{ marginBottom: 14, fontSize: 13, color: t.textDim }}>
+              Item: <strong style={{ color: t.text }}>{tipoLabel(assignItem.tipo)} {assignItem.marca} {assignItem.modelo}</strong>
+            </div>
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: 'block', fontSize: 10, color: t.textDim, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.06em', fontFamily: 'JetBrains Mono, monospace' }}>Selecionar PC</label>
+              <select value={assignPc} onChange={e => setAssignPc(e.target.value)} style={{ ...inp, width: '100%' }}>
+                {pcs.map(p => <option key={p.pc} value={p.pc}>{p.pc}{p.utilizador ? ` — ${p.utilizador.split('\\').pop()}` : ''}</option>)}
+              </select>
+            </div>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+              <button onClick={() => setAssignItem(null)} style={{ ...btn.ghost }}>Cancelar</button>
+              <button onClick={handleConfirmAssign} disabled={!assignPc}
+                style={{ ...btn.primary, opacity: assignPc ? 1 : 0.5 }}>
+                Confirmar Atribuição
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ===== Header =====
 const Header = ({ view, setView, lastSaved, onExport, onReset, themeName, setTheme, onThresholds, onBackup }) => {
   const t = useTheme();
@@ -3706,6 +4029,7 @@ const Header = ({ view, setView, lastSaved, onExport, onReset, themeName, setThe
           { k: 'dashboard', l: 'Dashboard', I: LayoutDashboard },
           { k: 'inventory', l: 'Inventário', I: FileSpreadsheet },
           { k: 'peripherals', l: 'Periféricos', I: Keyboard },
+          { k: 'warehouse', l: 'Armazém', I: Package },
           { k: 'planning', l: 'Plano de Substituição', I: Wrench },
         ].map(({ k, l, I }) => (
           <button key={k} onClick={() => setView(k)} style={{
@@ -3733,6 +4057,7 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
   const { custom: customFunctions, replaceCustomFunctions } = useFunctions();
   const { pcs, setPcs, loaded, lastSaved, reset } = useStorage();
   const { items: peripherals, setItems: setPeripherals, loaded: periphLoaded } = usePeripheralsStorage();
+  const { items: warehouseItems, setItems: setWarehouseItems, loaded: warehouseLoaded } = useWarehouseStorage();
   const [view, setView] = useState('dashboard');
   const [navFilters, setNavFilters] = useState({});
   const [navSeq, setNavSeq] = useState(0);
@@ -3748,6 +4073,10 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
   const [periphEditing, setPeriphEditing] = useState(null);
   const [isNewPeriph, setIsNewPeriph] = useState(false);
   const [confirmDelPeriph, setConfirmDelPeriph] = useState(null);
+  // Warehouse modal state
+  const [warehouseEditing, setWarehouseEditing] = useState(null);
+  const [isNewWarehouse, setIsNewWarehouse] = useState(false);
+  const [confirmDelWarehouse, setConfirmDelWarehouse] = useState(null);
 
   const handleSave = async (rec, originalPc) => {
     let next;
@@ -3800,6 +4129,31 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
     const next = peripherals.filter(x => x.id !== confirmDelPeriph.id);
     await setPeripherals(next);
     setConfirmDelPeriph(null);
+  };
+
+  const handleSaveWarehouse = async (rec) => {
+    const next = isNewWarehouse
+      ? [...warehouseItems, { ...rec, _persisted: true }]
+      : warehouseItems.map(x => x.id === rec.id ? { ...rec, _persisted: true } : x);
+    await setWarehouseItems(next);
+    setWarehouseEditing(null);
+    setIsNewWarehouse(false);
+  };
+
+  const handleDeleteWarehouse = async () => {
+    await setWarehouseItems(warehouseItems.filter(x => x.id !== confirmDelWarehouse.id));
+    setConfirmDelWarehouse(null);
+  };
+
+  const handleAssignWarehouse = async (item, pcName) => {
+    const today = new Date().toISOString().slice(0, 10);
+    const next = warehouseItems.map(x => x.id === item.id ? { ...x, atribuidoA: pcName, atribuidoEm: today } : x);
+    await setWarehouseItems(next);
+  };
+
+  const handleReturnWarehouse = async (item) => {
+    const next = warehouseItems.map(x => x.id === item.id ? { ...x, atribuidoA: null, atribuidoEm: null } : x);
+    await setWarehouseItems(next);
   };
 
   // Apply an imported backup: replaces PCs, peripherals, and (if present) thresholds.
@@ -3872,7 +4226,7 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
     }
   };
 
-  if (!loaded || !periphLoaded) {
+  if (!loaded || !periphLoaded || !warehouseLoaded) {
     return (
       <div style={{
         minHeight: '100vh', background: t.bg, display: 'flex',
@@ -3914,6 +4268,14 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
             onEdit={(rec) => { setPeriphEditing(rec); setIsNewPeriph(false); }}
             onDelete={(rec) => setConfirmDelPeriph(rec)}
             onAdd={() => { setIsNewPeriph(true); setPeriphEditing(newPeripheralRecord()); }} />
+        )}
+        {view === 'warehouse' && (
+          <Warehouse items={warehouseItems} pcs={pcs}
+            onAdd={() => { setIsNewWarehouse(true); setWarehouseEditing(newWarehouseItem()); }}
+            onEdit={(item) => { setIsNewWarehouse(false); setWarehouseEditing({ ...item, _persisted: true }); }}
+            onDelete={(item) => setConfirmDelWarehouse(item)}
+            onAssign={handleAssignWarehouse}
+            onReturn={handleReturnWarehouse} />
         )}
         {view === 'planning' && (
           <Planning pcs={pcs} onMarkTBR={handleMarkTBR}
@@ -3993,6 +4355,21 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
           danger
           onYes={handleDeletePeriph}
           onNo={() => setConfirmDelPeriph(null)} />
+      )}
+
+      {warehouseEditing !== null && (
+        <WarehouseItemForm
+          item={warehouseEditing}
+          onSave={handleSaveWarehouse}
+          onClose={() => { setWarehouseEditing(null); setIsNewWarehouse(false); }} />
+      )}
+
+      {confirmDelWarehouse && (
+        <Confirm title="Eliminar item do armazém?"
+          message={`Esta ação irá remover "${confirmDelWarehouse.marca || ''} ${confirmDelWarehouse.modelo || ''}".`.trim()}
+          danger
+          onYes={handleDeleteWarehouse}
+          onNo={() => setConfirmDelWarehouse(null)} />
       )}
     </div>
   );
