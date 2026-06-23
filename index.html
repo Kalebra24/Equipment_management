@@ -1466,7 +1466,41 @@ const Inventory = ({ pcs, onEdit, onDelete, onAdd, onConfirm, onShowLinks, navFi
 
   const funcoes = useMemo(() => [...new Set(pcs.map(p => p.funcao).filter(Boolean))].sort(), [pcs]);
   const estados = useMemo(() => [...new Set(pcs.map(p => p.estado).filter(Boolean))].sort(), [pcs]);
-  const ubicacoes = useMemo(() => [...new Set(pcs.map(p => (p.ubicacao || '').trim()).filter(Boolean))].sort(), [pcs]);
+
+  // Derive available locations from the set already filtered by every criterion EXCEPT location,
+  // so the dropdown only shows locations that have at least one matching PC.
+  const preFilteredForUbicacao = useMemo(() => pcs.filter(p => {
+    if (search) {
+      const s = search.toLowerCase();
+      if (!`${p.pc} ${p.utilizador} ${p.cpuClean} ${p.gpuClean} ${p.cpu} ${p.gpu}`.toLowerCase().includes(s)) return false;
+    }
+    if (tierFilter !== 'all') {
+      const tier = classifyTotal(p.totalScore || 0, thresholds, t);
+      if (tier.key !== tierFilter) return false;
+    }
+    if (funcaoFilter !== 'all' && p.funcao !== funcaoFilter) return false;
+    if (estadoFilter !== 'all' && p.estado !== estadoFilter) return false;
+    if (reviewFilter !== 'all') {
+      const rt = reviewTier(p.lastReview, t);
+      if (rt.key !== reviewFilter) return false;
+    }
+    if (disponibilidadeFilter !== 'all') {
+      const d = p.disponibilidade || 'outro';
+      if (d !== disponibilidadeFilter) return false;
+    }
+    return true;
+  }), [pcs, search, tierFilter, funcaoFilter, estadoFilter, reviewFilter, disponibilidadeFilter, t, thresholds]);
+
+  const ubicacoes = useMemo(() =>
+    [...new Set(preFilteredForUbicacao.map(p => (p.ubicacao || '').trim()).filter(Boolean))].sort(),
+  [preFilteredForUbicacao]);
+
+  // Auto-reset location filter when the selected value is no longer available
+  useEffect(() => {
+    if (ubicacaoFilter !== 'all' && !ubicacoes.includes(ubicacaoFilter)) {
+      setUbicacaoFilter('all');
+    }
+  }, [ubicacoes, ubicacaoFilter]);
 
   const filtered = useMemo(() => {
     let result = pcs.filter(p => {
