@@ -1133,6 +1133,7 @@ const Dashboard = ({ pcs, onNavigate }) => {
     let anoSum = 0, anoCount = 0, available = 0;
     const currentYear = new Date().getFullYear();
     pcs.forEach(p => {
+      if (p.abatido || p.perdido) return;
       const tier = classifyTotal(p.totalScore || 0, thresholds, t);
       buckets[tier.key]++;
       totalRam += (p.memMB || 0);
@@ -1246,7 +1247,7 @@ const Dashboard = ({ pcs, onNavigate }) => {
         <BreakdownCard title="Localização" data={stats.ubicacao}
           onRowClick={loc => nav({ ubicacaoFilter: loc })} />
         <BreakdownCard title="RAM por Banda" data={stats.ramBands} />
-        <BreakdownCard title="Ano de Compra" data={stats.anos} />
+        <BreakdownCard title="Ano de Compra" data={stats.anos} defaultSort="key" />
         <BreakdownCard title="Estado de Revisão" data={stats.reviewBuckets} labelMap={REVIEW_BREAKDOWN_LABELS}
           onRowClick={k => nav({ reviewFilter: k })} />
       </div>
@@ -1254,17 +1255,32 @@ const Dashboard = ({ pcs, onNavigate }) => {
   );
 };
 
-const BreakdownCard = ({ title, data, labelMap = {}, onRowClick }) => {
+const BreakdownCard = ({ title, data, labelMap = {}, onRowClick, defaultSort = 'count' }) => {
   const t = useTheme();
-  const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
+  const [sortBy, setSortBy] = React.useState(defaultSort);
+  const entries = Object.entries(data).sort((a, b) =>
+    sortBy === 'key' ? a[0].localeCompare(b[0]) : b[1] - a[1]
+  );
   const max = Math.max(...entries.map(e => e[1]), 1);
+  const canToggleSort = defaultSort === 'key' || Object.keys(data).some(k => /^\d{4}$/.test(k));
   return (
     <div style={{ background: t.bgPanel, border: `1px solid ${t.border}`, borderRadius: 8, padding: 18, boxShadow: t.shadow }}>
       <div style={{
-        fontSize: 11, color: t.textDim, letterSpacing: '0.12em',
-        textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         marginBottom: 14,
-      }}>{title}</div>
+      }}>
+        <div style={{
+          fontSize: 11, color: t.textDim, letterSpacing: '0.12em',
+          textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace',
+        }}>{title}</div>
+        {canToggleSort && (
+          <button onClick={() => setSortBy(s => s === 'count' ? 'key' : 'count')} style={{
+            background: 'none', border: `1px solid ${t.border}`, borderRadius: 4,
+            padding: '2px 7px', fontSize: 10, color: t.textDim, cursor: 'pointer',
+            fontFamily: 'JetBrains Mono, monospace',
+          }}>{sortBy === 'count' ? 'por ano' : 'por qtd'}</button>
+        )}
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {entries.slice(0, 8).map(([key, count]) => (
           <div key={key}
