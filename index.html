@@ -1259,7 +1259,7 @@ const BreakdownCard = ({ title, data, labelMap = {}, onRowClick, defaultSort = '
   const t = useTheme();
   const [sortBy, setSortBy] = React.useState(defaultSort);
   const entries = Object.entries(data).sort((a, b) =>
-    sortBy === 'key' ? a[0].localeCompare(b[0]) : b[1] - a[1]
+    sortBy === 'key' ? b[0].localeCompare(a[0]) : b[1] - a[1]
   );
   const max = Math.max(...entries.map(e => e[1]), 1);
   const canToggleSort = defaultSort === 'key' || Object.keys(data).some(k => /^\d{4}$/.test(k));
