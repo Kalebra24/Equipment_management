@@ -556,6 +556,7 @@ const newWarehouseItem = () => ({
   tamanho: '',
   estado: 'GOOD',
   notas: '',
+  codImobilizado: '',
   dataEntrada: new Date().toISOString().slice(0, 10),
   atribuidoA: null,
   atribuidoEm: null,
@@ -2361,6 +2362,10 @@ const EditModal = ({ pc, onSave, onClose, isNew, existingPcs }) => {
             <input value={form.so} onChange={e => update('so', e.target.value)} style={inputMono} />
           </ModalField>
 
+          <ModalField label="Código de imobilizado">
+            <input value={form.codImobilizado || ''} onChange={e => update('codImobilizado', e.target.value)} style={inputMono} placeholder="ex: 12345" />
+          </ModalField>
+
           <ModalField label="Notas adicionais" span={2}>
             <textarea
               value={form.notas || ''}
@@ -3939,6 +3944,10 @@ const WarehouseItemForm = ({ item, onSave, onClose }) => {
             <label style={lbl}>Data de Entrada</label>
             <input type="date" value={form.dataEntrada} onChange={e => update('dataEntrada', e.target.value)} style={inp} />
           </div>
+          <div>
+            <label style={lbl}>Código de imobilizado</label>
+            <input value={form.codImobilizado || ''} onChange={e => update('codImobilizado', e.target.value)} style={inp} placeholder="ex: 12345" />
+          </div>
           <div style={{ gridColumn: '1 / -1' }}>
             <label style={lbl}>Notas</label>
             <textarea value={form.notas} onChange={e => update('notas', e.target.value)} rows={3}
@@ -4421,7 +4430,7 @@ const AppInner = ({ themeName, setTheme, setThresholds, resetThresholds }) => {
       const cols = ['rank', 'pc', 'utilizador', 'funcao', 'ubicacao', 'estado',
         'disponibilidade', 'ano', 'idadeAnos',
         'so', 'cpuClean', 'cpuScore', 'memMB', 'gpuClean', 'gpuScore',
-        'totalScore', 'disks', 'ultComunic', 'lastReview', 'notas', 'abatido', 'perdido'];
+        'totalScore', 'disks', 'ultComunic', 'lastReview', 'notas', 'codImobilizado', 'abatido', 'perdido'];
       const headers = cols.join(',');
       const rows = pcs.map(p => cols.map(c => escapeCSV(p[c])).join(','));
       downloadCSV([headers, ...rows], `inegi_umec_pcs_${new Date().toISOString().slice(0, 10)}.csv`);
