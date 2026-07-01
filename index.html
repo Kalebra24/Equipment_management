@@ -567,8 +567,8 @@ const newPeripheralRecord = () => {
     id: 'p_' + Date.now(),
     utilizador: '',
     notes: '',
-    monitor1Present: false, monitor1Brand: '', monitor1Size: '', monitor1Status: 'GOOD',
-    monitor2Present: false, monitor2Brand: '', monitor2Size: '', monitor2Status: 'GOOD',
+    monitor1Present: false, monitor1Brand: '', monitor1Size: '', monitor1Status: 'GOOD', monitor1CodImobilizado: '',
+    monitor2Present: false, monitor2Brand: '', monitor2Size: '', monitor2Status: 'GOOD', monitor2CodImobilizado: '',
   };
   for (const item of SINGLE_PERIPHERALS) {
     rec[item.key + 'Present'] = false;
@@ -3035,7 +3035,7 @@ const PeripheralSectionHeader = ({ children }) => {
   );
 };
 
-const PeripheralBlock = ({ title, prefix, hasSize, type = 'full', canBePersonal = false, form, update }) => {
+const PeripheralBlock = ({ title, prefix, hasSize, hasCodImob = false, type = 'full', canBePersonal = false, form, update }) => {
   const t = useTheme();
   const present = form[prefix + 'Present'];
   const personal = canBePersonal && form[prefix + 'Personal'];
@@ -3124,6 +3124,17 @@ const PeripheralBlock = ({ title, prefix, hasSize, type = 'full', canBePersonal 
               </select>
             </div>
           </div>
+          {hasCodImob && (
+            <div style={{ marginTop: 8 }}>
+              <label style={lbl}>Código de imobilizado</label>
+              <input
+                value={form[prefix + 'CodImobilizado'] || ''}
+                onChange={e => update(prefix + 'CodImobilizado', e.target.value)}
+                style={inputMono}
+                placeholder="ex: 12345"
+              />
+            </div>
+          )}
           {canBePersonal && (
             <label style={{
               display: 'flex', alignItems: 'center', gap: 6,
@@ -3217,10 +3228,10 @@ const PeripheralEditModal = ({ rec, onSave, onClose, isNew }) => {
 
           <PeripheralSectionHeader>Monitores</PeripheralSectionHeader>
           <div style={{ gridColumn: 'span 2' }}>
-            <PeripheralBlock title="Monitor 1" prefix="monitor1" hasSize form={form} update={update} />
+            <PeripheralBlock title="Monitor 1" prefix="monitor1" hasSize hasCodImob form={form} update={update} />
           </div>
           <div style={{ gridColumn: 'span 2' }}>
-            <PeripheralBlock title="Monitor 2" prefix="monitor2" hasSize form={form} update={update} />
+            <PeripheralBlock title="Monitor 2" prefix="monitor2" hasSize hasCodImob form={form} update={update} />
           </div>
 
           <PeripheralSectionHeader>Acessórios</PeripheralSectionHeader>
